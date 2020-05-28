@@ -23,4 +23,25 @@ public class MemberServiceImpl implements MemberService{
 		return list;
 	}
 
+//	@Override
+//	public void saveUsers(Users user) {
+//		userRepository.save(user);
+//	}
+//
+//	@Override
+//	public Users userDetail(String id) {
+//		Optional<Users> optional = userRepository.findById(id);
+//		if(optional.isPresent()) {
+//			Users user = optional.get();
+//			return user;
+//		} else {
+//			throw new NullPointerException();
+//		}
+//	}
+//
+//	@Override
+//	public void userDelete(String id) {
+//		userRepository.deleteById(id);
+//	}
+//	
 }
