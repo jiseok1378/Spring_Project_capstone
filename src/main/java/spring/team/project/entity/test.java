@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class test {
 	private String a;
+	private int JeBal;
 }
