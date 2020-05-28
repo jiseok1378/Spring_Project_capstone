@@ -9,3 +9,4 @@ public class test {
 	private int wow;
 	private String b;
 }
+   
