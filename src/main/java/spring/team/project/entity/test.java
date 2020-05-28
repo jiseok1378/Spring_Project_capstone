@@ -6,4 +6,5 @@ import lombok.Data;
 public class test {
 	private String a;
 	private int JeBal;
+	private int wow;
 }
