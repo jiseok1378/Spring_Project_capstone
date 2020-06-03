@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메인 페이지</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link> -->
+
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<div style="padding: 2rem;">
+
+	<div  class="container-fluid text-center bg-main">
+		<h1 class="K_fontsize_65px">COVID-19</h1><p><br>
+	</div>
+	
+
+	<nav style="padding: 1.5rem 1rem 1.5rem 10rem;" class="navbar navbar-expand-md bg-dark navbar-dark">
+		<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+			<ul class="K_fontsize_20px navbar-nav mr-auto">
+			
+				<li class="K_pad5rem nav-item">
+					<a class="nav-link" href="/main/mainLive">현황판</a>
+				</li>
+				<li class="K_pad5rem nav-item active">
+					<a class="nav-link" href="/main/mainInfo">COVID-19 정보</a>
+				</li>
+				<li class="K_pad5rem nav-item">
+					<a class="nav-link" href="/main/mainMove">확진자 동선</a>
+				</li>
+				<li class="K_pad5rem nav-item">
+		            <a class="nav-link" href="/main/mainQA">Q&A</a>
+				</li>
+			
+			</ul>
+		</div>
+		<div class="K_fontsize_20px navbar-collapse collapse w-100% order-3">
+		<ul class="navbar-nav ml-auto">
+	        <li class="K_pad5rem nav-item">
+	            <a class="nav-link" href="#myModal" data-toggle="modal">LogIn</a>
+	        </li>
+	    </ul>
+		</div>
+	</nav>
+	<p>
+	<!-- Modal HTML -->
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog modal-login">
+			<div class="modal-content">
+				<div class="modal-header">
+<!-- 					<div class="avatar">
+						<img src="/examples/images/avatar.png" alt="Avatar">
+					</div> -->				
+					<h4 class="modal-title">Member Login</h4>	
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form action="/examples/actions/confirmation.php" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" name="username" placeholder="Username" required="required">		
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" placeholder="Password" required="required">	
+						</div>        
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+						</div>
+					</form>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+
+<div class="container-fluid" style="min-height: calc(100vh - 136px);">
+	<!-- 그룹 태그로 role과 aria-multiselectable를 설정한다. -->
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<!-- 하나의 item입니다. 미작동 : data-parent 설청과 href 설정 제대로 하기 -->
+		<div class="panel panel-default">
+			<div class="panel-heading K_fontsize_20px K_bord_bottom" role="tab">
+				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false">
+				[이미지] 긴급재난지원금 안내
+				</a>
+			</div>
+			<div id="collapse1" class="panel-collapse collapse " role="tabpanel">
+				<div class="panel-body">
+					<div class="K_bord_bottom K_fontsize_13px">
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 담당 :</span> <span class="">여성가족부</span>&nbsp;&nbsp;&nbsp;
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 작성일 :</span> <span class="">2020-05-20 15:16</span>&nbsp;&nbsp;&nbsp;		                                        
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 수정일 :</span> <span class="">2020-05-20 15:55</span>
+					<p>
+					</div>
+					 <p>
+					<div class="" style="background-color: white;">
+					본문내용~~~
+					<p style="text-align: center"><img style="text-align: center" src="" width="500px" height="500px"/>
+					<p style="text-align: center"><img style="text-align: center" src="" width="500px" height="500px"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 하나의 item입니다. -->
+		<div class="panel panel-default">
+			<div class="panel-heading K_fontsize_20px" role="tab">
+				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false">
+				[이미지] 사실상 이혼 상태에 있는 가구원도 긴급 재난 지원금을 신청,수령할 수 있습니다.
+				</a>
+			</div>
+			<div id="collapse2" class="panel-collapse collapse" role="tabpanel">
+				<div class="panel-body">
+					<div class="K_bord_bottom K_fontsize_13px">
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 담당 :</span> <span class="">행정안전부</span>&nbsp;&nbsp;&nbsp;
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 작성일 :</span> <span class="">2020-05-20 15:16</span>&nbsp;&nbsp;&nbsp;		                                        
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 수정일 :</span> <span class="">2020-05-20 15:55</span>
+					<p>
+					</div>
+					 <p>
+					<div class="" style="background-color: white;">
+					본문내용~~~
+					<p style="text-align: center"><img src="" width="500px" height="500px"/>
+					<p style="text-align: center"><img src="" width="500px" height="500px"/>	
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+
+<!-- 
+<script>
+// Collapse로 화면이 펼치기 전에 호출
+$('.collapse').on('show.bs.collapse', function () {
+// icon을 + 마크로 변경한다.
+var target = $("[href='#"+$(this).prop("id")+"']");
+target.removeClass("fa-plus-square");
+target.addClass("fa-minus-square");
+});
+// Collapse로 화면이 펼친 후에 호출
+$('.collapse').on('shown.bs.collapse', function () {
+// icon을 + 마크로 변경한다.
+var target = $("[href='#"+$(this).prop("id")+"']");
+target.removeClass("fa-plus-square");
+target.addClass("fa-minus-square");
+});
+// Collapse로 화면에 접기 전에 호출
+$('.collapse').on('hide.bs.collapse', function () {
+// icon을 - 마크로 변경한다.
+var target = $("[href='#"+$(this).prop("id")+"']");
+target.removeClass("fa-minus-square");
+target.addClass("fa-plus-square");
+});
+// Collapse로 화면에 접고 난 후에 호출
+$('.collapse').on('hidden.bs.collapse', function () {
+// icon을 - 마크로 변경한다.
+var target = $("[href='#"+$(this).prop("id")+"']");
+target.removeClass("fa-minus-square");
+target.addClass("fa-plus-square");
+});
+</script> -->
+
+</body>
+</html>

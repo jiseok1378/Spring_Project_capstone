@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "locationss")
+@Table(name = "location")
 @NoArgsConstructor
 @Data
 public class Location {
@@ -19,9 +19,9 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-	@Column(name = "longitude")
+	@Column(name = "longitude", columnDefinition = "위도")
 	private float x;
-	@Column(name = "latitude")
+	@Column(name = "latitude", columnDefinition = "경도")
 	private float y;
 	private String name; 
 	@Column(length = 100)

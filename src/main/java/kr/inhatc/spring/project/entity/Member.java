@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
+
+import kr.inhatc.spring.chat.entity.MemberQnA;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,10 +24,13 @@ public class Member {
 
 	@Id
 	@Column(name = "MEMBER_ID")
-	private int id;
-	@OneToMany(mappedBy = "memberId")
-	private List<ComeGo> cg = new ArrayList<ComeGo>();
+	private int idx;
 	
+	@OneToMany(mappedBy = "memberId")
+	private List<MemberQnA> qu = new ArrayList<MemberQnA>();
+	
+	@Column(length = 20)
+	private String id; 
 	@Column(length = 20)
 	private String pw; 
 	@Column(length = 20)
@@ -32,6 +38,7 @@ public class Member {
 	@Column(length = 20)
 	private String tel;
 	private String address;
+	@ColumnDefault("0") 
 	private char role;	
 
 }

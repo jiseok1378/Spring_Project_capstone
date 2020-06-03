@@ -1,5 +1,4 @@
-package kr.inhatc.spring.project.entity;
-
+package kr.inhatc.spring.chat.entity;
 
 import java.time.LocalDateTime;
 
@@ -13,31 +12,32 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import kr.inhatc.spring.project.entity.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "comingAndGoing")
+@Table(name = "memberQna")
 @NoArgsConstructor
 @Data
-public class ComeGo {
-
+public class MemberQnA {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idx;
+	
+	@ManyToOne(targetEntity = Member.class)
+	@JoinColumn(name = "member_id")
+	private int memberId;
+	
+	@Column(length = 500)
+	private String question;
+	@Column(length = 5000)
+	private String answer;
 
-	@Column(length=1000)
-	private String personName;
-	private int identifiedNum;
-	
 	@Column(insertable = false, updatable = false)
-	private LocalDateTime cometInTime;
+	private LocalDateTime writeTime;
 	@PrePersist
-    public void cometInTime() {
-        this.cometInTime = LocalDateTime.now();
+    public void entranceTime() {
+        this.writeTime = LocalDateTime.now();
     }
-	
-	private float temperate;
-	private String storedFilePath; 
-	
 }

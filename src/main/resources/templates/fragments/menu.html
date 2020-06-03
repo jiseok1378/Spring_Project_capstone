@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="menuFragment">
+	
+	<div style="padding: 2rem;">
+
+	<div  class="container-fluid text-center bg-main">
+		<h1 class="K_fontsize_65px">COVID-19</h1><p><br>
+	</div>
+	
+
+	<nav style="padding: 1.5rem 1rem 1.5rem 10rem;" class="navbar navbar-expand-md bg-dark navbar-dark">
+		<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+			<ul class="K_fontsize_20px navbar-nav mr-auto">
+			
+				<li class="K_pad5rem nav-item">
+					<a class="nav-link" href="/main/mainLive">현황판</a>
+				</li>
+				<li class="K_pad5rem nav-item">
+					<a class="nav-link" href="/main/mainInfo">COVID-19 정보</a>
+				</li>
+				<li class="K_pad5rem nav-item">
+					<a class="nav-link" href="/main/mainMove">확진자 동선</a>
+				</li>
+				<li class="K_pad5rem nav-item">
+		            <a class="nav-link" href="/main/mainQA">Q&A</a>
+				</li>
+			
+			</ul>
+		</div>
+		<div class="K_fontsize_20px navbar-collapse collapse w-100% order-3">
+		<ul class="navbar-nav ml-auto">
+	        <li class="K_pad5rem nav-item">
+	            <a class="nav-link" href="#myModal" data-toggle="modal">LogIn</a>
+	        </li>
+	    </ul>
+		</div>
+	</nav>
+	<p>
+	<!-- Modal HTML -->
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog modal-login">
+			<div class="modal-content">
+				<div class="modal-header">			
+					<h4 class="modal-title">로그인</h4>	
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form action="/examples/actions/confirmation.php" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" name="username" placeholder="Username" required="required">		
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" placeholder="Password" required="required">	
+						</div>        
+						<div class="form-group">
+							<input type="submit" class="btn btn-primary btn-lg btn-block login-btn" value="로그인">
+						</div>
+					</form>
+					<div class="form-group">
+						<a class="pull-right" href="#myModal2" data-toggle="modal">회원가입</a>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+	
+	<!-- 회원가입 -->
+		<div id="myModal2" class="modal fade">
+		<div class="modal-dialog modal-login">
+			<div class="modal-content">
+				<div class="modal-header">			
+					<h4 class="modal-title">회원가입</h4>	
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<form action="/main/mainLive" method="get">
+						<div class="form-group">
+							<input type="text" class="form-control" name="username" placeholder="아이디를 입력하세요" required="required">	
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" placeholder="패스워드를 입력하세요" required="required">	
+						</div>  
+						<div class="form-group">
+							<input type="text" class="form-control" name="username" placeholder="전화번호를 입력하세요" required="required">	
+						</div>   
+						<div class="form-group">
+							<input type="submit" class="btn btn-primary btn-lg btn-block login-btn" value="가입하기" onclick="done();">
+						</div>
+					</form>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+	
+	</div>
+<script type="text/javascript">
+function done(){
+	// 나중에 아이디 비교 후 틀릴경우 추가.
+	alert("가입이 완료되었습니다. 다시 로그인해주세요.")
+}
+</script>
+</header>
+</html>

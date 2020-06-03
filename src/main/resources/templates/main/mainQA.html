@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메인 페이지</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style_QA.css}">
+<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 추가 -->
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<!-- 추가 -->
+<script>
+var date;
+var year;
+var month;
+var day;
+var hour;
+var min;
+var time;
+var curDateFmt2;
+var d2;
+
+function serverToday(){ 
+	  var xmlHttp; 
+	  //분기하지 않으면 IE에서만 작동된다. 
+	  if (window.XMLHttpRequest) { // IE 7.0 이상, 크롬, 파이어폭스일 경우 분기 
+	    xmlHttp = new XMLHttpRequest(); 
+	    xmlHttp.open('HEAD',window.location.href.toString(),false);
+	    xmlHttp.setRequestHeader("Content-Type", "text/html"); 
+	    xmlHttp.send(''); 
+	  }else if (window.ActiveXObject) { 
+	    xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+	    xmlHttp.open('HEAD',window.location.href.toString(),false);
+	    xmlHttp.setRequestHeader("Content-Type", "text/html"); 
+	    xmlHttp.send(''); 
+	  } 
+	  var st = xmlHttp.getResponseHeader("Date");
+	  var curDate = new Date(st); 
+	  var curDateFmt; var year = curDate.getFullYear(); 
+	  var month = curDate.getMonth()+1; 
+	  var day = curDate.getDate(); 
+	  var hours = curDate.getHours(); 
+	  var minutes = curDate.getMinutes(); 
+	  if(parseInt(month) < 10){ 
+	    month = 0 + "" + month; 
+	  } 
+	  if(parseInt(day) < 10){ 
+	    day = 0 + "" + day; 
+	  } 
+	  if(parseInt(hours) < 10){ 
+	    hours = 0 + "" + hours; 
+	  } if(parseInt(minutes) < 10){ 
+	    minutes = 0 + "" + minutes; 
+	  } 
+	  var curDateFmt = year + "-" + month + "-" + day + "T" + hours + ":" + minutes + ":00";
+	  var d = new Date(curDateFmt);
+	  var time1 = moment(d).format('h:mm a | MMMM DD')
+	  console.log(time1);
+	  return time1; 
+	}
+
+
+	$(document).ready(function() {
+		
+		
+	});
+
+	function chatList() {
+
+		$.ajax({
+					url : 'http://0e881d80b8f0.ngrok.io/dto/',
+					type : 'post',
+					//contentType: "application/json",
+					data : {
+						'Q' : $('#Q').val()
+					},
+					beforeSend : function(jqXHR) {
+						console.log("호출전");
+						time = serverToday();
+						$('#QnA').append(
+										"<div class='received-chats'>"
+												+ "<div class='received-chats-img'>"
+												+ "<img src='user.jpg'>"
+												+ "</div>"
+												+ "<div class='received-msg'>"
+												+ "<div class='received-msg-inbox'>"
+												+ "<p>"
+												+ $('#Q').val()
+												+ "</p>"
+												+ "<span class='time'>"+ time +"</span>"
+												+ "</div>" + "</div>"
+												+ "</div>")
+					},
+					success : function(data) {
+						console.log("성공");
+						console.log(data);
+						/* $('#A').append("<p>" + data['A'] + "</p>") */
+						date = data['datetime'];
+						year = date.substring(0,4);
+						month = date.substring(4,6);
+						day = date.substring(6,8);
+						hour = date.substring(8,10);
+						min = date.substring(10,12);
+						curDateFmt2 = year + "-" + month + "-" + day + "T" + hour + ":" + min + ":00";
+						d2 = new Date(curDateFmt2);
+						time2 = moment(d2).format('h:mm a | MMMM DD');
+
+						$('#QnA').append(
+								"<div class='outgoing-chats'>"
+								+ "<div class='outgoing-chats-msg'>"
+								+ "<p>"
+								+ data['A'] +"</p>"
+								+ "<span class='time'>"+ time2 +"</span>"
+								+ "</div>"
+								+ "<div class='outgoing-chats-img'>"
+								+ "<img src='AI_img.jpg'>"
+								+ "</div></div>")
+					},
+					error : function(jqXHR) {
+						alert("serialize err");
+						//$('#A').text(errorThrown);
+					}
+				});
+	}
+</script>
+</head>
+<body>
+	<div style="padding: 2rem;">
+
+		<div class="container-fluid text-center bg-main">
+			<h1 class="K_fontsize_65px">COVID-19</h1>
+			<p>
+				<br>
+		</div>
+
+
+		<nav style="padding: 1.5rem 1rem 1.5rem 10rem;"
+			class="navbar navbar-expand-md bg-dark navbar-dark">
+			<div
+				class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+				<ul class="K_fontsize_20px navbar-nav mr-auto">
+
+					<li class="K_pad5rem nav-item"><a class="nav-link"
+						href="/main/mainLive">현황판</a></li>
+					<li class="K_pad5rem nav-item"><a class="nav-link"
+						href="/main/mainInfo">COVID-19 정보</a></li>
+					<li class="K_pad5rem nav-item"><a class="nav-link"
+						href="/main/mainMove">확진자 동선</a></li>
+					<li class="K_pad5rem nav-item active"><a class="nav-link"
+						href="/main/mainQA" onclick="connect();">Q&A</a></li>
+
+				</ul>
+			</div>
+			<div class="K_fontsize_20px navbar-collapse collapse w-100% order-3">
+				<ul class="navbar-nav ml-auto">
+					<li class="K_pad5rem nav-item"><a class="nav-link"
+						href="#myModal" data-toggle="modal">LogIn</a></li>
+				</ul>
+			</div>
+		</nav>
+		<p>
+			<!-- Modal HTML -->
+		<div id="myModal" class="modal fade">
+			<div class="modal-dialog modal-login">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!-- 					<div class="avatar">
+						<img src="/examples/images/avatar.png" alt="Avatar">
+					</div> -->
+						<h4 class="modal-title">Member Login</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<form action="/examples/actions/confirmation.php" method="post">
+							<div class="form-group">
+								<input type="text" class="form-control" name="username"
+									placeholder="Username" required="required">
+							</div>
+							<div class="form-group">
+								<input type="password" class="form-control" name="password"
+									placeholder="Password" required="required">
+							</div>
+							<div class="form-group">
+								<button type="submit"
+									class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+							</div>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 여기서부터 채팅 div -->
+		<div class="container">
+			<!-- message -->
+			<div class="msg-header">
+				<div class="msg-header-img">
+					<img src="user.jpg">
+				</div>
+				<div id="greetings" class="active2">
+					<h4>Covid-19 AI에게 질문하기</h4>
+					<h6></h6>
+				</div>
+				<div class="header-icons">
+					<i class="fa fa-phone"></i>
+					<!-- 상담원 직접통화 -->
+					&nbsp; <i class="fa fa-exclamation-triangle"></i>
+					<!-- 문제 발생시 -->
+				</div>
+			</div>
+
+			<div class="chat-page">
+				<!-- 채팅 화면 -->
+				<div class="msg-inbox">
+					<div class="chats">
+						<div class="msg-page">
+							<!-- 질문과 답 -->
+							<div id=QnA>
+								<!-- ajax로 들어옴 -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 입력부분 -->
+				<div class="msg-bottom">
+						<div class="input-group">
+							<input type="text" id="Q" class="form-control"
+								placeholder="챗봇에게 물어보세요">
+							<div class="input-group-append">
+								<a class="btn btn-default" type="submit"
+									onclick="chatList();"> <span class="input-group-text"><i
+										class="fa fa-paper-plane"></i></span>
+								</a>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

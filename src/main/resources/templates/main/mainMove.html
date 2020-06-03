@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- index.html  고유 CSS 추가 -->
+<th:block layout:fragment="css">
+
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+
+</th:block>
+<div layout:fragment="content">
+	<div class=""
+		style="min-height: calc(100vh - 136px); margin: 0px 100px 0px 100px;">
+		<!---------------------------------- select 옵셥 변경  (추가)  ------------------------------>
+		<span> <span class="pull-left" style="font-size: 30px">
+				&nbsp; 지역별 확진자 동선</span> <span class="pull-right"> 
+				<select id="city" name="city" class="K_select" onchange="selectCon()">
+					<option value="#">==== 선택 ====</option>
+					<option th:value="@{/main/mainMove/all}">전체</option>
+					<option th:value="@{/main/mainMove/강원}">강원도</option>
+					<option th:value="@{/main/mainMove/경기}">경기도</option>
+					<option th:value="@{/main/mainMove/경남}">경상남도</option>
+					<option th:value="@{/main/mainMove/경북}">경상북도</option>
+					<option th:value="@{/main/mainMove/광주}">광주광역시</option>
+					<option th:value="@{/main/mainMove/대구}">대구광역시</option>
+					<option th:value="@{/main/mainMove/대전}">대전광역시</option>
+					<option th:value="@{/main/mainMove/부산}">부신광역시</option>
+					<option th:value="@{/main/mainMove/서울}">서울특별시</option>
+					<option th:value="@{/main/mainMove/세종}">세종특별자치시</option>
+					<option th:value="@{/main/mainMove/울산}">울산광역시</option>
+					<option th:value="@{/main/mainMove/인천}">인천광역시</option>
+					<option th:value="@{/main/mainMove/전남}">전라남도</option>
+					<option th:value="@{/main/mainMove/전북}">전라북도</option>
+					<option th:value="@{/main/mainMove/제주}">제주특별자치도</option>
+					<option th:value="@{/cmain/mainMove/충남}">충청남도</option>
+					<option th:value="@{/main/mainMove/충북}">충청북도</option>
+			</select>
+		</span>
+		</span>
+		<div style="border-bottom: 2px solid black; height: 50px;">
+			<!-- 밑줄 -->
+		</div>
+		<!-------------------------------------------- 테이블 형태로 데이터를 가져옴(추가) -------------------------------------------->
+		<table class="table table-striped table-sm table-hover">
+			<colgroup>
+				<col width="70%" />
+				<col width="30%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">주소</th>
+					<th scope="col">날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
+					<td><a href="" th:text="${vo.name}"></a></td>
+					<td th:text="${vo.date}"></td>
+				</tr>
+				<tr th:unless="${#lists.size(list)} > 0">
+					<td colspan="2" class="text-center">조회된 결과가 없습니다.</td>
+				</tr>
+
+			</tbody>
+		</table>
+		
+		<h6 class="text-right display-4 text-primary ">최근 14일 내 기록</h6>
+		<!-- 여기까지 추가 -->
+		<p>
+		<div class="panel-group" id="accordion" role="tablist"
+			aria-multiselectable="true">
+
+			<!-------------------------------------------- 지역 - 인천 -------------------------------------------->
+			<div class="panel panel-default incheonMove">
+
+				<div class="panel-heading K_fontsize_20px K_bord_bottom incheonMove"
+					role="tab">
+					<!-- 제목 부분 -->
+					<a role="button" data-toggle="collapse" data-parent="#accordion"
+						href="#collapse1" aria-expanded="false"> 인천1 </a>
+					<!-- DB 연동시 이걸로 변경(제목을 식별값으로 사용하여 어떤것을 펼칠지 구분) (서울,대구도 마찬가지로 사용) -->
+					<!-- 				<a role="button" data-toggle="collapse" data-parent="#accordion"
+						href="#" th:attrappend="href= ${vo.제목}" aria-expanded="false" th:text="${vo.제목}"></a> -->
+				</div>
+				<!-- 본문 내용 -->
+				<div id="collapse1" class="panel-collapse collapse" role="tabpanel">
+					<!-- DB 연동시 이걸로 변경 -->
+					<!-- 			<div th:id="${vo.제목}" class="panel-collapse collapse" role="tabpanel"> -->
+					<div class="panel-body">
+						<div class="K_bord_bottom K_fontsize_13px">
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 담당 :</span> <span
+								class="">여성가족부</span>&nbsp;&nbsp;&nbsp; <span class=""><i
+								class="fa fa-circle"> </i>&nbsp; 작성일 :</span> <span class="">2020-05-20
+								15:16</span>&nbsp;&nbsp;&nbsp; <span class=""><i
+								class="fa fa-circle"> </i>&nbsp; 수정일 :</span> <span class="">2020-05-20
+								15:55</span>
+							<p>
+						</div>
+						<p>
+						<div class="" style="background-color: white;">
+							본문내용~~~
+							<p style="text-align: center">
+								<img style="text-align: center" src="" width="500px"
+									height="500px" />
+							<p style="text-align: center">
+								<img style="text-align: center" src="" width="500px"
+									height="500px" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-------------------------------------------- 지역 - 서울 -------------------------------------------->
+			<div class="panel panel-default seoulMove ">
+
+				<div class="panel-heading K_fontsize_20px seoulMove" role="tab">
+					<!-- 제목 -->
+					<a role="button" data-toggle="collapse" data-parent="#accordion"
+						href="#collapse2" aria-expanded="false"> 서울 1 </a>
+				</div>
+				<div id="collapse2" class="panel-collapse collapse" role="tabpanel">
+					<div class="panel-body">
+						<div class="K_bord_bottom K_fontsize_13px">
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 담당 :</span> <span
+								class="">행정안전부</span>&nbsp;&nbsp;&nbsp; <span class=""><i
+								class="fa fa-circle"> </i>&nbsp; 작성일 :</span> <span class="">2020-05-20
+								15:16</span>&nbsp;&nbsp;&nbsp; <span class=""><i
+								class="fa fa-circle"> </i>&nbsp; 수정일 :</span> <span class="">2020-05-20
+								15:55</span>
+							<p>
+						</div>
+						<p>
+						<div class="" style="background-color: white;">
+							본문내용~~~
+							<p style="text-align: center">
+								<img src="" width="500px" height="500px" />
+							<p style="text-align: center">
+								<img src="" width="500px" height="500px" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-------------------------------------------- 지역 - 대구 -------------------------------------------->
+			<div class="panel panel-default daeguMove">
+				<div class="panel-heading K_fontsize_20px daeguMove" role="tab">
+					<a role="button" data-toggle="collapse" data-parent="#accordion"
+						href="#collapse3" aria-expanded="false"> 대구 1 </a>
+				</div>
+				<div id="collapse3" class="panel-collapse collapse" role="tabpanel">
+					<div class="panel-body">
+						<div class="K_bord_bottom K_fontsize_13px">
+							<span class=""><i class="fa fa-circle"> </i>&nbsp; 담당 :</span> <span
+								class="">행정안전부</span>&nbsp;&nbsp;&nbsp; <span class=""><i
+								class="fa fa-circle"> </i>&nbsp; 작성일 :</span> <span class="">2020-05-20
+								15:16</span>&nbsp;&nbsp;&nbsp; <span class=""><i
+								class="fa fa-circle"> </i>&nbsp; 수정일 :</span> <span class="">2020-05-20
+								15:55</span>
+							<p>
+						</div>
+						<p>
+						<div class="" style="background-color: white;">
+							본문내용~~~
+							<p style="text-align: center">
+								<img src="" width="500px" height="500px" />
+							<p style="text-align: center">
+								<img src="" width="500px" height="500px" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+ 		$('#city').change(function() {
+			if ($(this).val() == 'all') {
+				$('.incheonMove').show();
+				$('.seoulMove').show();
+				$('.daeguMove').show();
+			}
+			if ($(this).val() == 'incheon') {
+				$('.incheonMove').show();
+				$('.seoulMove').hide();
+				$('.daeguMove').hide();
+			}
+			if ($(this).val() == 'seoul') {
+				$('.incheonMove').hide();
+				$('.seoulMove').show();
+				$('.daeguMove').hide();
+			}
+			if ($(this).val() == 'Daegu') {
+				$('.incheonMove').hide();
+				$('.seoulMove').hide();
+				$('.daeguMove').show();
+			}
+
+		}); 
+		//추가
+		function selectCon() {
+			location.href = city.value;
+		}
+	</script>
+</div>
+
+
+</html>
