@@ -10,10 +10,42 @@
  .K_padall5rem{padding: 5rem;}
  .K_middle{left: 50%;}
  .K_bord_bottom{border-bottom: 1px solid gray;}
- .wrap{padding: 10rem;}
+ .wrap{padding: 4rem;}
  .wrap2{ 
  border-radius: 27px 27px 27px 27px;
  padding: 15px;
  -webkit-box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);
 -moz-box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);
 box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);}
+.K_select_box {
+  position: relative;
+  width: 200px;
+  height: 32px;
+  background: url(http://cfile1.uf.tistory.com/image/27423E43565F8EF627B215) 0 center no-repeat;
+  /* 화살표 이미지 */
+}
+.K_select_box label {
+  position: absolute;
+  font-size: 14px;
+  color: #fff;
+  top: 7px;
+  left: 12px;
+  letter-spacing: 1px;
+}
+.K_select_box select#color {
+  width: 100%;
+  height: 32px;
+  min-height: 32px;
+  line-height: 32px;
+  padding: 0 10px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  /* IE 8 */
+}
+.K_hover:hover{
+	color: white !important;
+	background-color: black !important;
+}
+.K_select{
+	background: gray; color: white; font-size: 20px; padding: 5px; width: 200px; vertical-align: top; border-radius: 5px;
+}

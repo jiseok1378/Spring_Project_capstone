@@ -43,10 +43,11 @@ public class MainController {
 	}
 
 	
-	@RequestMapping(value = "/main/mainQA", method=RequestMethod.GET)
-	public String main(Model model) {
-		return "main/mainQA";
-	}
+//	@RequestMapping(value = "/main/mainQA", method=RequestMethod.GET)
+//	public String main(Model model) {
+//		//Conscontroller로 이동
+//		return "main/mainQA";
+//	}
 
 	@RequestMapping(value = {"/main/mainMove","/main/mainMove/{area}"}, method=RequestMethod.GET)
 	public String confirmerList(@PathVariable("area") Optional<String> areaId, Model model) {
@@ -63,16 +64,7 @@ public class MainController {
 
 		return "main/mainMove";
 	}
-	
-	
-	
-	// 테스트 및 만들기용
-	@RequestMapping(value = "/main/a", method=RequestMethod.GET)
-	public String userList(Model model) {
-		return "main";
-	}
-	
-	
+			
 
 	//	@RequestMapping(value = "/user/userInsert", method=RequestMethod.POST)
 	//	public String userInsert(Users user) {

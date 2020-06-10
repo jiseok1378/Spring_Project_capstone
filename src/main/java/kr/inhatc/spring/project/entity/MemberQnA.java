@@ -1,6 +1,5 @@
 package kr.inhatc.spring.project.entity;
 
-
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -15,27 +14,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "comingAndGoing")
+@Table(name = "memberQna")
 @NoArgsConstructor
 @Data
-public class ComeGo {
-
+public class MemberQnA {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idx;
 
-	@Column(length=1000)
-	private String personName;
-	private int identifiedNum;
+	private int userId;
 	
+	@Column(length = 500)
+	private String question;
+	@Column(length = 5000)
+	private String answer;
+
 	@Column(insertable = false, updatable = false)
-	private LocalDateTime cometInTime;
+	private LocalDateTime writeTime;
 	@PrePersist
-    public void cometInTime() {
-        this.cometInTime = LocalDateTime.now();
+    public void entranceTime() {
+        this.writeTime = LocalDateTime.now();
     }
-	
-	private float temperate;
-	private String storedFilePath; 
-	
 }

@@ -22,21 +22,6 @@
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
 	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
-	<script th:inline="javascript">
-		/* <![CDATA[*/
-		var userId = /*[[${sender}]]*/null;
-		/* ]]> */
-		/* <![CDATA[*/
-		var sender = /*[[${sender}]]*/null;
-		/* ]]> */
-		/* <![CDATA[*/
-		var receiver = /*[[${receiver}]]*/null;
-		/* ]]> */
-		/* <![CDATA[*/
-		var who = /*[[${who}]]*/null;
-		/* ]]> */
-	</script>
-	<script src="/app.js"></script>
 
 </th:block>
 
@@ -67,7 +52,7 @@
 					<div class="msg-page">
 						<!-- 질문과 답 -->
 						<div id=QnA>
-							<!-- websocket으로 주고 받음 -->
+							<!-- ajax로 들어옴 -->
 						</div>
 					</div>
 				</div>
@@ -76,24 +61,32 @@
 			<div class="msg-bottom">
 				<div class="input-group">
 					<input type="text" id="Q" class="form-control"
-						placeholder="상담원에게 물어보세요">
+						placeholder="챗봇에게 물어보세요">
 					<div class="input-group-append">
-						<a id="chatSend"><span class="input-group-text"><i
-								class="fa fa-paper-plane"></i></span> </a><span>
-							<button class="btn btn-info">
-								<a id="back" href="/main/mainQA">챗봇으로 돌아가기</a>
-							</button>
-						</span>
+						<a onclick="chatList();"> <span
+							class="input-group-text"><i class="fa fa-paper-plane"></i></span>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<script>
+			var url_link = 'http://c19e17c41821.ngrok.io/dto/'
+			var date;
+			var year;
+			var month;
+			var day;
+			var hour;
+			var min;
+			var time;
+			var curDateFmt2;
+			var d2;
+
 			function serverToday() {
 				var xmlHttp;
 				//분기하지 않으면 IE에서만 작동된다. 
-				if (window.XMLHttpRequest) { // IE 7.0 이상, 크롬, 파이어폭스일 경우 분기 
+				if (window.XMLHttpRequest) { //IE 7.0 이상, 크롬, 파이어폭스일 경우 분기 
 					xmlHttp = new XMLHttpRequest();
 					xmlHttp
 							.open('HEAD', window.location.href.toString(),
@@ -139,6 +132,61 @@
 			$(document).ready(function() {
 
 			});
+
+			function chatList() {
+
+				$.ajax({
+					url : url_link,
+					type : 'post',
+					//contentType: "application/json",
+					data : {
+						'Q' : $('#Q').val()
+					},
+					beforeSend : function(jqXHR) {
+						console.log("호출전");
+						d = serverToday();
+						time = moment(d).format('h:mm a | MMMM DD');
+						$('#QnA').append(
+								"<div class='outgoing-chats'>"
+										+ "<div class='outgoing-chats-msg'>"
+										+ "<p>" + $('#Q').val() + "</p>"
+										+ "<span class='time'>" + time
+										+ "</span>" + "</div>"
+										+ "<div class='outgoing-chats-img'>"
+										+ "<img src='AI_img.jpg'>"
+										+ "</div></div>")
+					},
+					success : function(data) {
+						console.log("성공");
+						console.log(data);
+						/* $('#A').append("<p>" + data['A'] + "</p>") */
+						date = data['datetime'];
+						year = date.substring(0, 4);
+						month = date.substring(4, 6);
+						day = date.substring(6, 8);
+						hour = date.substring(8, 10);
+						min = date.substring(10, 12);
+						curDateFmt2 = year + "-" + month + "-" + day + "T"
+								+ hour + ":" + min + ":00";
+						d2 = new Date(curDateFmt2);
+						time2 = moment(d2).format('h:mm a | MMMM DD');
+						$('#QnA').append(
+								"<div class='received-chats'>"
+										+ "<div class='received-chats-img'>"
+										+ "<img src='user.jpg'>" + "</div>"
+										+ "<div class='received-msg'>"
+										+ "<div class='received-msg-inbox'>"
+										+ "<p>" + data['A'] + "</p>"
+										+ "<span class='time'>" + time2
+										+ "</span>" + "</div>" + "</div>"
+										+ "</div>")
+					},
+					error : function(jqXHR) {
+						alert("serialize err");
+						//$('#A').text(errorThrown);
+					}
+				});
+			}
 		</script>
 
 	</div>

@@ -1,92 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>메인 페이지</title>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"></link> -->
+<!-- index.html  고유 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
 
-<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</head>
-<body>
-
-
-<div style="padding: 2rem;">
-
-	<div  class="container-fluid text-center bg-main">
-		<h1 class="K_fontsize_65px">COVID-19</h1><p><br>
-	</div>
-	
-
-	<nav style="padding: 1.5rem 1rem 1.5rem 10rem;" class="navbar navbar-expand-md bg-dark navbar-dark">
-		<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-			<ul class="K_fontsize_20px navbar-nav mr-auto">
-			
-				<li class="K_pad5rem nav-item active">
-					<a class="nav-link" href="/main/mainLive">현황판</a>
-				</li>
-				<li class="K_pad5rem nav-item">
-					<a class="nav-link" href="/main/mainInfo">COVID-19 정보</a>
-				</li>
-				<li class="K_pad5rem nav-item">
-					<a class="nav-link" href="/main/mainMove">확진자 동선</a>
-				</li>
-				<li class="K_pad5rem nav-item">
-		            <a class="nav-link" href="/main/mainQA">Q&A</a>
-				</li>
-			
-			</ul>
-		</div>
-		<div class="K_fontsize_20px navbar-collapse collapse w-100% order-3">
-		<ul class="navbar-nav ml-auto">
-	        <li class="K_pad5rem nav-item">
-	            <a class="nav-link" href="#myModal" data-toggle="modal">LogIn</a>
-	        </li>
-	    </ul>
-		</div>
-	</nav>
-	<p>
-	<!-- Modal HTML -->
-	<div id="myModal" class="modal fade">
-		<div class="modal-dialog modal-login">
-			<div class="modal-content">
-				<div class="modal-header">
-<!-- 					<div class="avatar">
-						<img src="/examples/images/avatar.png" alt="Avatar">
-					</div> -->				
-					<h4 class="modal-title">Member Login</h4>	
-	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<form action="/examples/actions/confirmation.php" method="post">
-						<div class="form-group">
-							<input type="text" class="form-control" name="username" placeholder="Username" required="required">		
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" name="password" placeholder="Password" required="required">	
-						</div>        
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
-						</div>
-					</form>
-				</div>
-	
-			</div>
-		</div>
-	</div>     
-
-	<div class="wrap">
+<div layout:fragment="content">
+    <div class="wrap">
 		<div class="top container wrap2">
 			<h1 class="text-center K_font_size_30px">전 세계</h1><br>
 			<div class="row dashboard world K_fontsize_20px">
@@ -160,5 +87,4 @@
 	</div>
 
 </div>
-</body>
 </html>
