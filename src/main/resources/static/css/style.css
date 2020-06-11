@@ -3,20 +3,25 @@
  .K_fontsize_25px{font-size: 25px;}
  .K_fontsize_20px{font-size: 20px;}
  .K_fontsize_13px{font-size: 13px;}
- .K_fontsize_18px{font-size: 18px;}
+ .K_fontsize_18px{font-size: 16px; padding: .5rem;}
  .K_fontsize_65px{font-size: 65px;}
  .K_fontsize{font-size: 1px}
- .K_pad5rem{padding-right: 5rem; padding-left: 5rem;}
+ .K_pad1rem{padding-right: 1rem; padding-left: 1rem;}
  .K_padall5rem{padding: 5rem;}
  .K_middle{left: 50%;}
  .K_bord_bottom{border-bottom: 1px solid gray;}
- .wrap{padding: 4rem;}
+ .wrap{padding: 0 4rem 0 4rem;}
  .wrap2{ 
+ width: 65vw !important;
  border-radius: 27px 27px 27px 27px;
  padding: 15px;
  -webkit-box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);
--moz-box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);
-box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);}
+ -moz-box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);
+ box-shadow: 0px 9px 30px -3px rgba(89,83,89,1);}
+.K_background{
+	background:  #54cff9 !important;
+	color: white !important;
+}
 .K_select_box {
   position: relative;
   width: 200px;

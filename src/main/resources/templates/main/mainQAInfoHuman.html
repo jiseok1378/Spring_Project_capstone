@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- index.html  고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/style_QA.css}">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+<!-- 채팅창용 -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- 추가 -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+	<!-- 추가 -->
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script th:inline="javascript">
+		/* <![CDATA[*/
+		var userId = /*[[${sender}]]*/null;
+		/* ]]> */
+		/* <![CDATA[*/
+		var sender = /*[[${sender}]]*/null;
+		/* ]]> */
+		/* <![CDATA[*/
+		var receiver = /*[[${receiver}]]*/null;
+		/* ]]> */
+		/* <![CDATA[*/
+		var who = /*[[${who}]]*/null;
+		/* ]]> */
+	</script>
+	<script src="/app.js"></script>
+
+<!-- 이미지 자동 넘기기용 -->
+   <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+   <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+		
+</th:block>
+<script> $('.carousel').carousel({ interval: 2000 //기본 5초 }) </script>
+<div layout:fragment="content" style="height: calc(100vh-86px) !important;">
+	<div class="abc" style="margin: 0 50px; padding-top: 70px;">
+		<div class="row">
+ 			<div class="col"
+				style="padding: 10px; overflow:scroll;">
+				<div th:replace="fragments/info :: infoFragment"></div>
+				<!-- 게시판 -->
+			</div>
+			<div class="">
+				<div class="row"
+					style="padding: 10px 10px 0px 10px; width: 21rem; ">
+					<!-- 코로나 이슈 -->
+					<div th:replace="fragments/hot :: hotFragment"></div>
+					
+				</div>
+				
+				<div class="row"
+					style="padding: 0px 10px 10px 10px; width: 21rem; height: 20rem !important;" >
+					<!-- 채팅창 -->
+					<div th:replace="fragments/chathuman :: chathumanFragment"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+</html>

@@ -1,22 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/default">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- index.html  고유 CSS 추가 -->
-<th:block layout:fragment="css">
-</th:block>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<header th:fragment="infoFragment">
 
-
-<!-- index.html 고유 스크립트 추가 -->
-<th:block layout:fragment="script">
-</th:block>
-<div layout:fragment="content">
-
-
-	<div class=""
-		style="min-height: calc(100vh - 136px); margin: 0px 100px 0px 100px;">
+		<div
+		style="min-height: calc(100vh - 1000px); margin: 0px; padding-right: 5px;">
 
 		<span class="pull-left" style="font-size: 30px">&nbsp; Covid-19 정보</span>
 
@@ -26,18 +14,17 @@
 		<p>
 
 			<!-- 그룹 태그로 role과 aria-multiselectable를 설정한다. -->
-		<div class="panel-group" id="accordion" role="tablist"
-			aria-multiselectable="true">
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="overflow: scroll !important;">
 			<!-- 하나의 item입니다. 미작동 : data-parent 설청과 href 설정 제대로 하기 -->
-			<div class="panel panel-default">
-				<div class="panel-heading K_fontsize_20px K_bord_bottom" role="tab">
+			<div class="panel panel-default" style="overflow: scroll !important;">
+				<div class="panel-heading K_fontsize_18px K_bord_bottom" role="tab">
 				<!-- 이부분 디비 연동시 href값 맞추는거 mainMove부분 주석 참조 -->
 					<a role="button" data-toggle="collapse" data-parent="#accordion"
 						href="#collapse1" aria-expanded="false"> [이미지] 긴급재난지원금 안내 </a>
 				</div>
-				<div id="collapse1" class="panel-collapse collapse " role="tabpanel">
-					<div class="panel-body">
-						<div class="K_bord_bottom K_fontsize_13px">
+				<div id="collapse1" class="panel-collapse collapse " role="tabpanel" >
+					<div class="panel-body" >
+						<div class="K_bord_bottom K_fontsize_13px" >
 							<span class=""><i class="fa fa-circle"> </i>&nbsp; 담당 :</span> <span
 								class="">여성가족부</span>&nbsp;&nbsp;&nbsp; <span class=""><i
 								class="fa fa-circle"> </i>&nbsp; 작성일 :</span> <span class="">2020-05-20
@@ -47,7 +34,7 @@
 							<p>
 						</div>
 						<p>
-						<div class="" style="background-color: white;">
+						<div class="" style="background-color: white; " >
 							본문내용~~~
 							<p style="text-align: center">
 								<img style="text-align: center" src="" width="500px"
@@ -61,7 +48,7 @@
 			</div>
 			<!-- 하나의 item입니다. -->
 			<div class="panel panel-default">
-				<div class="panel-heading K_fontsize_20px" role="tab">
+				<div class="panel-heading K_fontsize_18px" role="tab">
 					<a role="button" data-toggle="collapse" data-parent="#accordion"
 						href="#collapse2" aria-expanded="false"> [이미지] 사실상 이혼 상태에 있는
 						가구원도 긴급 재난 지원금을 신청,수령할 수 있습니다. </a>
@@ -78,7 +65,7 @@
 							<p>
 						</div>
 						<p>
-						<div class="" style="background-color: white;">
+						<div class="" style="background-color: white; ">
 							본문내용~~~
 							<p style="text-align: center">
 								<img src="" width="500px" height="500px" />
@@ -90,6 +77,6 @@
 			</div>			
 		</div>
 	</div>
-</div>
 
+</header>
 </html>

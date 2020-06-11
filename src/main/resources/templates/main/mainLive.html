@@ -13,75 +13,83 @@
 </th:block>
 
 <div layout:fragment="content">
-    <div class="wrap">
+
+<p><br>
+
+    <div class="wrap" th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
 		<div class="top container wrap2">
-			<h1 class="text-center K_font_size_30px">전 세계</h1><br>
-			<div class="row dashboard world K_fontsize_20px">
+			<h2 class="text-center">전 세계</h2>
+			<div class="row dashboard world K_fontsize_18px">
 				<div class="col-4 col-sm-4 col-md-3 text-center">
-					<p class="confirmed number">5,937,120<p>
-					<p class="confirmed diff">(+29,344)</p>
+					<p class="confirmed number" th:text="${vo.con_w}"><p>
+					<p class="confirmed diff" th:text="${vo.incon_w}"></p>
 					<p>확진자</p>
 				</div>
 	
 				<div class="col-4 col-sm-4 col-md-2 text-center">
-					<p class="death red number">364,408</p>
-					<p class="death diff">(+1,515)</p>
+					<p class="death red number" th:text="${vo.dead_w}"></p>
+					<p class="death diff" th:text="${vo.indead_w}"></p>
 					<p>사망자</p>
 				</div>
 				<div class="col-4 col-sm-4 col-md-2 text-center">
-					<p class="released number">2,630,669</p>
-					<p class="released diff">(+22,726)</p>
+					<p class="released number" th:text="${vo.iso_w}"></p>
+					<p class="released diff" th:text="${vo.iniso_w}"></p>
 					<p>격리해제</p>
 				</div>
 				<div class="col-6 col-sm-6 col-md-3 text-center">
-					<p class="fatality number">6.14%</p>
-					<p> (-)</p>
+					<p class="fatality number" th:text="${vo.fatality_w}"></p>
+					<p> &nbsp;</p>
 					<p>치사율</p>
 				</div>
 				<div class="col-6 col-sm-6 col-md-2 text-center">
-					<p class="country number">214</p>
-					<p class="country diff">(-)</p>
+					<p class="country number" th:text="${vo.contry_w}"></p>
+					<p class="country diff" th:text="${vo.incontry_w}"></p>
 					<p>발생국</p>
 				</div>
-			</div><p><br><p><br>
+			</div><p><br>
 	
-			<h1 class="text-center K_font_size_30px">대한민국</h1><br>
-			<div class="row dashboard domestic K_fontsize_20px">
+			<h2 class="text-center">대한민국</h2>
+			<div class="row dashboard domestic K_fontsize_18px">
 				<div class="col-3 col-sm-3 col-md-2 text-center">
-					<p class="confirmed number">11,402</p>
-					<p class="confirmed diff">(-)</p>
+					<p class="confirmed number" th:text="${vo.con_k}"></p>
+					<p class="confirmed diff" th:text="${vo.incon_k}"></p>
 					<p>확진자</p></div>
 				<div class="col-3 col-sm-3 col-md-1 text-center">
-					<p class="death red number">269</p>
-					<p class="death diff">(-)</p>
+					<p class="death red number" th:text="${vo.dead_k}"></p>
+					<p class="death diff" th:text="${vo.indead_k}"></p>
 					<p>사망자</p>
 				</div>
 				<div class="col-3 col-sm-3 col-md-2 text-center">
-					<p class="released number">10,363</p>
-					<p class="released diff">(-)</p>
+					<p class="released number" th:text="${vo.iso_k}"></p>
+					<p class="released diff" th:text="${vo.iniso_k}"></p>
 					<p>격리해제</p>
 				</div>
 				
 				<div class="col-3 col-sm-3 col-md-1 text-center">
-					<p class="fatality number">2.36%</p>
-					<p>(-)</p><p>치사율</p></div>		
+					<p class="fatality number" th:text="${vo.fatality_k}"></p>
+					<p> &nbsp;</p>
+					<p>치사율</p></div>		
 				<div class="col-4 col-sm-4 col-md-2 text-center">
-					<p class="candidate number">885,120</p>
-					<p class="candidate diff">(-)</p>
+					<p class="candidate number" th:text="${vo.check_k}"></p>
+					<p class="candidate diff" th:text="${vo.incheck_k}"></p>
 					<p>총검사자</p>
 				</div>
 				<div class="col-4 col-sm-4 col-md-2 text-center">
-					<p class="testing number">24,557</p>
-					<p class="testing diff">(-)</p>
+					<p class="testing number" th:text="${vo.checking_k}"></p>
+					<p class="testing diff" th:text="${vo.inchecking_k}"></p>
 					<p>검사중</p>
 				</div>	
 				<div class="col-4 col-sm-4 col-md-2 text-center">
-					<p class="negative number">849,161</p>
-					<p class="negative diff">(-)</p>
+					<p class="negative number" th:text="${vo.neg_k}"></p>
+					<p class="negative diff" th:text="${vo.inneg_k}"></p>
 					<p>결과음성</p>
 					<br>
-					<div class="K_fontsize_13px"> 업데이트 : 2020-05-29</div>
 				</div>
+			</div>
+			<div class="K_fontsize_13px pull-right" th:text="${vo.update_time}"></div>
+			<div class="text-center">
+			<br>
+				<h5>*대한민국 수치는 질병관리본부 보도자료 기준<p>*증감수치는 전일 발표 대비 변화량</h5>
 			</div>
 		</div>
 	</div>

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.inhatc.spring.project.entity.Live;
 import kr.inhatc.spring.project.entity.Location;
+import kr.inhatc.spring.project.service.LiveService;
 import kr.inhatc.spring.project.service.NormalService;
 
 @Controller
@@ -22,32 +24,37 @@ public class MainController {
 
 	@Autowired
 	private NormalService normalService;
+	
+	@Autowired
+	private LiveService liveService;
 
 	@RequestMapping("/")
 	public String hello() {
 		log.debug("===========>" + "메인페이지임다!!!");
-		return "redirect:/main";
+		return "redirect:/mainMain";
 	}
 	
 	@RequestMapping(value = "/main", method=RequestMethod.GET)
 	public String mainPage() {
-		return "main/mainInfo";
+		return "main/mainMain";
 	}
 	@RequestMapping(value = "/main/mainInfo", method=RequestMethod.GET)
 	public String info() {
 		return "main/mainInfo";
 	}
 	@RequestMapping(value = "/main/mainLive", method=RequestMethod.GET)
-	public String live() {
+	public String live(Model model) {
+		List<Live> list = liveService.liveList();
+		model.addAttribute("list",list);
 		return "main/mainLive";
 	}
 
 	
-//	@RequestMapping(value = "/main/mainQA", method=RequestMethod.GET)
-//	public String main(Model model) {
-//		//Conscontroller로 이동
-//		return "main/mainQA";
-//	}
+	@RequestMapping(value = "/main/mainQA22", method=RequestMethod.GET)
+	public String main(Model model) {
+		//Conscontroller로 이동
+		return "main/mainQAInfo";
+	}
 
 	@RequestMapping(value = {"/main/mainMove","/main/mainMove/{area}"}, method=RequestMethod.GET)
 	public String confirmerList(@PathVariable("area") Optional<String> areaId, Model model) {

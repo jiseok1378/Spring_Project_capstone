@@ -1,0 +1,49 @@
+body{
+	margin: 0 !important;
+	padding: 0!important;
+	font-family: "montserrat",sans-serif !important;
+}
+
+
+
+.image{
+	width: 100px;
+	overflow: hidden;
+	cursor: pointer;
+	position: relative;
+	margin: 0 20px;
+	z-index: 1; /* 밑에 span 안보이게 */
+	
+}
+.image img{
+	width: 100%;	
+}
+.image::before{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	filter: grayscale(100%);
+	transition: .5s linear;
+}
+.image:hover::before{
+	width: 0;
+}
+.image:nth-child(1)::before{
+	background-image: url(/images_main/chat/chat1.png)
+}
+.image:nth-child(2)::before{
+	background-image: url(/images_main/info/info1.png)
+}
+.image:nth-child(3)::before{
+	background-image: url(/images_main/live/live1.png)
+}
+.image:nth-child(4)::before{
+	background-image: url(/images_main/mask/mask2.png)
+}
+.image:nth-child(5)::before{
+	background-image: url(/images_main/move/move2.png)
+}

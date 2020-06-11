@@ -76,11 +76,11 @@ public class ConsController {
 			int conId = chatService.findId(uid);
 			model.addAttribute("receiver", conId);
 			model.addAttribute("who","사용자");
-			return "main/mainQA";
+			return "main/mainQAInfoHuman";
 			
 		} else {
 			//log.debug("============>" + "기본");
-			return "main/mainQAChat";
+			return "main/mainQAInfoAI";
 		}
 
 		
@@ -98,7 +98,7 @@ public class ConsController {
 			randId = rand.nextInt(2147483647);
 //			log.debug("다시다시다시다싣");
 		}
-		randId = 2;
+//		randId = 2;
 		room.setUserId(randId);
 		room.setState("대기중");
 //		log.debug("==========>"+room.getUserId());
