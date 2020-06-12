@@ -93,7 +93,7 @@ $(function () {
 			e.preventDefault();}
 	});
 	$( "#back" ).click(function(e) { 
-		$( "#help" ).unbind();
+//		$( "#help" ).unbind();
 		sendBye();
 		disconnect();});
 	$( "#chatSend" ).click(function(){ 
