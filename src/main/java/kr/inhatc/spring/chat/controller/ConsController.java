@@ -49,12 +49,12 @@ public class ConsController {
 		//로그인 안되있어서 우선 상수로
 		HttpSession session = request.getSession();
 		//Integer conId = (Integer) session.getAttribute("conIdId");
-		int conId=1;
+		String conId="1";
 //		if(conId==null) conId=1;
 		
 		//상담상태 변경 및 상담원 번호 등록
 		Room room = chatService.findRoom(userId);
-		room.setConsId(conId);
+		room.setConsId(Integer.parseInt(conId));
 		room.setState("상담중");
 		chatService.saveRoom(room);
 		
@@ -74,7 +74,7 @@ public class ConsController {
 			model.addAttribute("sender", uid);
 			
 			int conId = chatService.findId(uid);
-			model.addAttribute("receiver", conId);
+			model.addAttribute("receiver", Integer.toString(conId));
 			model.addAttribute("who","사용자");
 			return "main/mainQAInfoHuman";
 			
@@ -92,7 +92,7 @@ public class ConsController {
 		Random rand = new Random();
 		long seed = System.currentTimeMillis();
 		rand = new Random(seed);
-		int randId = rand.nextInt(2147483647);
+		int randId = rand.nextInt(2147483547)+100;
 		//중복 방지 - 이미 있는 사용자인지 확인
 		while (chatService.findId(randId)!=-1) {
 			randId = rand.nextInt(2147483647);

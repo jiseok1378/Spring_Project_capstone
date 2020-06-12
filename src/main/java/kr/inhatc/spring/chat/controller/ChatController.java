@@ -23,15 +23,27 @@ public class ChatController {
 	private ChatService chatService;
 	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
-
+	int n = 0;
+	
 	@MessageMapping("/chat/send")
 	public void chat(ChatLog chatLog) throws Exception {
+		if(chatLog.getConId()!=0) {
 //		consultant든 user든 userId에 가져옴 현재는
 		int receiver = chatLog.getUserId();
-		/* chatService.saveMessage(chatLog); */
-		log.debug("==================>" + chatLog);
+		int m = chatLog.getConId();
+		n++;
+		chatLog.setNum(n);
+
+		log.debug("==========>"+chatLog.getConId());
+		log.debug("==========>"+chatLog); 
 		// receiver에게 보냄
 		simpMessagingTemplate.convertAndSend("/topic/"+receiver, chatLog);
+		
+		if(receiver <100) {
+			chatLog.setConId(receiver);
+			chatLog.setUserId(m);
+		}
+		 chatService.saveMessage(chatLog); }
 	}
 	
 	@RequestMapping("/chat/chatbot")

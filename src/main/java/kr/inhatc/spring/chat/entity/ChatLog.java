@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -26,17 +27,20 @@ import lombok.NoArgsConstructor;
 @Table(name = "chatlog")
 @NoArgsConstructor
 @Data
+@IdClass(ChatLogPK.class)
 public class ChatLog {
 	@Id
 	private int userId;
 	
-	@ManyToOne(targetEntity = Consultant.class)
-	@JoinColumn(name = "conId")
+//	@ManyToOne(targetEntity = Consultant.class)
+//	@JoinColumn(name = "conId")
 	private int conId;
 	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int num; 
 	
+	@Id
 	@Column(insertable = false, updatable = false)
 	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime sendTime;

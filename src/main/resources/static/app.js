@@ -20,7 +20,8 @@ function connect() {
 	stompClient = Stomp.over(socket);
 	stompClient.connect({}, function (frame) {
 		console.log('Connected: ' + frame);
-
+		if(sender > 100){
+		LoadingWithMask();}
 		// topic 뒤에 식별번호 sender (보내는 사람)
 		stompClient.subscribe('/topic/'+ sender, function (chatLog) {
 			//보낼때말고 받을 때도 시간필요
@@ -43,7 +44,7 @@ function sendChat() {
 	// /app/hello로 JSON 파라미터를 메세지 body로 전송.
 	d = serverToday();
 	time = moment(d).format('h:mm a | MMMM DD');
-	data = {'userId':receiver, 'conId':sender,'receiver':receiver,'sender':sender,'sendTime':d,'content':$("#Q").val(),'who':who};
+	data = {'userId':receiver, 'conId':sender,/*'receiver':receiver,'sender':sender,*/'sendTime':d,'content':$("#Q").val(),'who':who};
 	stompClient.send("/app/chat/send", {}, JSON.stringify(data));
 	showMe(); 
 }
@@ -54,7 +55,10 @@ function sendBye() {
 	stompClient.send("/app/chat/send", {}, JSON.stringify(data));
 }
 function showChat(chatLog) {
-	receiver = chatLog.conId/*parseInt(chatLog.conId);*/
+	receiver = chatLog.conId;/*parseInt(chatLog.conId);*/
+	if(receiver<100){
+		closeLoadingWithMask();
+	}
 	$("#QnA").append("<div class='received-chats'>"
 			+ "<div class='received-chats-img'>"
 			+ "<img src='user.jpg'>"

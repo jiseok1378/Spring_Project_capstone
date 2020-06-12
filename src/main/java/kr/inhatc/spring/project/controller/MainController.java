@@ -31,7 +31,7 @@ public class MainController {
 	@RequestMapping("/")
 	public String hello() {
 		log.debug("===========>" + "메인페이지임다!!!");
-		return "redirect:/mainMain";
+		return "redirect:/main";
 	}
 	
 	@RequestMapping(value = "/main", method=RequestMethod.GET)
@@ -50,11 +50,11 @@ public class MainController {
 	}
 
 	
-	@RequestMapping(value = "/main/mainQA22", method=RequestMethod.GET)
-	public String main(Model model) {
-		//Conscontroller로 이동
-		return "main/mainQAInfo";
-	}
+//	@RequestMapping(value = "/main/mainQA", method=RequestMethod.GET)
+//	public String main(Model model) {
+//		//Conscontroller로 이동
+//		return "main/mainQA";
+//	}
 
 	@RequestMapping(value = {"/main/mainMove","/main/mainMove/{area}"}, method=RequestMethod.GET)
 	public String confirmerList(@PathVariable("area") Optional<String> areaId, Model model) {
