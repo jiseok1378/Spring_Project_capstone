@@ -16,11 +16,11 @@
 
 <p><br>
 
-    <div class="wrap" th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
-		<div class="top container wrap2">
+    <div  class="wrap" th:if="${#lists.size(list)} > 0" th:each="vo : ${list}" >
+		<div class="top container wrap2" >
 			<h2 class="text-center">전 세계</h2>
 			<div class="row dashboard world K_fontsize_18px">
-				<div class="col-4 col-sm-4 col-md-3 text-center">
+				<div class="col-4 col-sm-4 col-md-3 text-center" >
 					<p class="confirmed number" th:text="${vo.con_w}"><p>
 					<p class="confirmed diff" th:text="${vo.incon_w}"></p>
 					<p>확진자</p>
@@ -88,6 +88,7 @@
 			</div>
 			<div class="K_fontsize_13px pull-right" th:text="${vo.update_time}"></div>
 			<div class="text-center">
+			
 			<br>
 				<h5>*대한민국 수치는 질병관리본부 보도자료 기준<p>*증감수치는 전일 발표 대비 변화량</h5>
 			</div>

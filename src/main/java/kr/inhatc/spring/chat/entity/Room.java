@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 
 /***
  * 채팅방 상태 생성
- * @author heeju
  *
  */
 @Entity
@@ -27,13 +26,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class Room {
+	
 	@Id //매일 디비 초기화, auto_increment 초기화
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int roomId; 
 	private int userId; 
-	
-//	@ManyToOne(targetEntity = Consultant.class)
-//	@JoinColumn(name = "conId")
+
 	@Column(columnDefinition = "int default 0")
 	private int consId; 
 	

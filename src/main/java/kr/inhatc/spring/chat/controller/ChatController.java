@@ -39,7 +39,7 @@ public class ChatController {
 		// receiver에게 보냄
 		simpMessagingTemplate.convertAndSend("/topic/"+receiver, chatLog);
 		
-		if(receiver <100) {
+		if(receiver < 100) {
 			chatLog.setConId(receiver);
 			chatLog.setUserId(m);
 		}
@@ -49,6 +49,12 @@ public class ChatController {
 	@RequestMapping("/chat/chatbot")
 	public String hello() {
 		return "chat/chatbot";
+	}
+	
+	@RequestMapping("/mask")
+	public String mask() {
+		
+		return "chat/mask";
 	}
 	
 //	//채팅 뷰

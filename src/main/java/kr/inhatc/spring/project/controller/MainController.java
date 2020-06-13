@@ -49,57 +49,18 @@ public class MainController {
 		return "main/mainLive";
 	}
 
-	
-//	@RequestMapping(value = "/main/mainQA", method=RequestMethod.GET)
-//	public String main(Model model) {
-//		//Conscontroller로 이동
-//		return "main/mainQA";
-//	}
-
 	@RequestMapping(value = {"/main/mainMove","/main/mainMove/{area}"}, method=RequestMethod.GET)
 	public String confirmerList(@PathVariable("area") Optional<String> areaId, Model model) {
 		if (areaId.isPresent()){
 			String area = areaId.get();
-			//log.debug("==========   >" + "실행 돼");
 			List<Location> confirmer = normalService.confirmerList(area);
 			model.addAttribute("list", confirmer);
 		} else {
-			//log.debug("============>" + "ㄴㄴㄴㄴㄴ");
 			List<Location> confirmer = normalService.confirmerList("%");
 			model.addAttribute("list", confirmer);
 		}
 
 		return "main/mainMove";
 	}
-			
 
-	//	@RequestMapping(value = "/user/userInsert", method=RequestMethod.POST)
-	//	public String userInsert(Users user) {
-	//		userService.saveUsers(user);
-	//		return "redirect:/user/userList";
-	//	}
-	//	
-	//	@RequestMapping(value = "/user/userDetail/{id}", method=RequestMethod.GET)
-	//	public String userDetail(@PathVariable("id") String id, Model model) { //@PathVariable 경로처럼 가져옴
-	//		Users user = userService.userDetail(id);
-	//		model.addAttribute("user", user);
-	//		//System.out.println("============> " + user);
-	//		return "user/userDetail";
-	//	}
-	//	
-	//	@RequestMapping(value = "/user/userUpdate/{id}", method=RequestMethod.POST)
-	//	public String userUpdate(@PathVariable("id") String id, Users user) {
-	//		
-	//		// 아이디 설정
-	//		user.setId(id);
-	//		//System.out.println("=========> " + user);
-	//		userService.saveUsers(user);
-	//		return "redirect:/user/userList";
-	//	}
-	//	
-	//	@RequestMapping(value = "/user/userDelete/{id}", method=RequestMethod.GET)
-	//	public String useDelete(@PathVariable("id") String id) {
-	//		userService.userDelete(id);
-	//		return "redirect:/user/userList";
-	//	}
 }

@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8" />
-<header th:fragment="menuFragment">
 
+<style>
+a{
+	color : white;
+}
+
+</style>
+
+<header th:fragment="menuFragment">
 	<div style="position: fixed; width: 100%; z-index:9999;">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav class="navbar navbar-expand-lg" style ="background: #323edd;" >
 			<a class="navbar-brand" style="padding: 0;" href="/main/"><img src="/images_main/logo/logo.png" alt="" style="width:11rem ;"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarTogglerDemo02"
@@ -12,115 +19,30 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 	<!-- 				<li class="nav-item active">
 						<a class="nav-link"	href="/main/mainTest2">Main<span class="sr-only">(current)</span></a>
 					</li> -->
 					<li class="K_pad1rem nav-item">
-						<a class="nav-link" href="/main/mainLive">현황판</a>
+						<a class="nav-link" href="/main/mainLive" style = "color : white;">현황판</a>
 					</li>
 <!-- 					<li class="K_pad1rem nav-item">
 						<a class="nav-link" href="/main/mainInfo">COVID-19 �젙蹂�</a>
 					</li> -->
 					<li class="K_pad1rem nav-item">
-						<a class="nav-link"	href="/main/mainMove">확진자 동선</a>
+						<a class="nav-link"	href="/main/mainMove" style = "color : white;">확진자 동선</a>
 					</li>
 					<li class="K_pad1rem nav-item">
-						<a class="nav-link" href="/main/mainQA">COVID-19 정보/Q&A</a>
+						<a class="nav-link" href="/main/mainQA" style = "color : white;">COVID-19 정보/Q&A</a>
 					</li>
 					<li class="K_pad1rem nav-item">
-						<a class="nav-link"	href="/main/mainCon">상담원</a>
+						<a class="nav-link"	href="/main/mainCon" style = "color : white;">상담원</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
 
-<!-- 		<nav style="padding: .5rem 1rem .5rem 5rem;"
-			class="navbar navbar-expand-md bg-dark navbar-dark">
-			<div
-				class="K_fontsize_18px navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-				<ul class=" navbar-nav mr-auto">
-
-					<li class="K_pad5rem nav-item"><a class="nav-link"
-						href="/main/mainLive">�쁽�솴�뙋</a></li>
-					<li class="K_pad5rem nav-item"><a class="nav-link"
-						href="/main/mainInfo">COVID-19 �젙蹂�</a></li>
-					<li class="K_pad5rem nav-item"><a class="nav-link"
-						href="/main/mainMove">�솗吏꾩옄 �룞�꽑</a></li>
-					<li class="K_pad5rem nav-item"><a class="nav-link"
-						href="/main/mainQA">Q&A</a></li>
-					<li class="K_pad5rem nav-item"><a class="nav-link"
-						href="/main/main�긽�떞�썝">�긽�떞�썝</a></li>
-
-				</ul>
-			</div>
-			<div class="K_fontsize_18px navbar-collapse collapse w-100% order-3">
-				<ul class="navbar-nav ml-auto">
-					<li class=" nav-item"><a class="nav-link" href="#myModal"
-						data-toggle="modal">LogIn</a></li>
-				</ul>
-			</div>
-		</nav>
-		<p> -->
-			<!-- Modal HTML -->
-			<!-- 	<div id="myModal" class="modal fade">
-		<div class="modal-dialog modal-login">
-			<div class="modal-content">
-				<div class="modal-header">			
-					<h4 class="modal-title">濡쒓렇�씤</h4>	
-	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<form action="/examples/actions/confirmation.php" method="post">
-						<div class="form-group">
-							<input type="text" class="form-control" name="username" placeholder="Username" required="required">		
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" name="password" placeholder="Password" required="required">	
-						</div>        
-						<div class="form-group">
-							<input type="submit" class="btn btn-primary btn-lg btn-block login-btn" value="濡쒓렇�씤">
-						</div>
-					</form>
-					<div class="form-group">
-						<a class="pull-right" href="#myModal2" data-toggle="modal">�쉶�썝媛��엯</a>
-					</div>
-				</div>
-	
-			</div>
-		</div>
-	</div>
-	
-	�쉶�썝媛��엯
-		<div id="myModal2" class="modal fade">
-		<div class="modal-dialog modal-login">
-			<div class="modal-content">
-				<div class="modal-header">			
-					<h4 class="modal-title">�쉶�썝媛��엯</h4>	
-	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<form action="/main/mainLive" method="get">
-						<div class="form-group">
-							<input type="text" class="form-control" name="username" placeholder="�븘�씠�뵒瑜� �엯�젰�븯�꽭�슂" required="required">	
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" name="password" placeholder="�뙣�뒪�썙�뱶瑜� �엯�젰�븯�꽭�슂" required="required">	
-						</div>  
-						<div class="form-group">
-							<input type="text" class="form-control" name="username" placeholder="�쟾�솕踰덊샇瑜� �엯�젰�븯�꽭�슂" required="required">	
-						</div>   
-						<div class="form-group">
-							<input type="submit" class="btn btn-primary btn-lg btn-block login-btn" value="媛��엯�븯湲�" onclick="done();">
-						</div>
-					</form>
-				</div>
-	
-			</div>
-		</div>
-	</div> -->
 </div>
 	<script type="text/javascript">
 		function done() {

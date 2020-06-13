@@ -5,15 +5,7 @@ if(userId!=null){
 	connect();
 }
 
-//function notClick(){
-//	if(isRun == true){
-//		console.log("끝");
-//		return;
-//	}
-//
-//	isRun = true;
-//	location.href = '/chat/idMake';
-//}
+
 
 function connect() {
 	var socket = new SockJS('/websocket');
@@ -55,7 +47,7 @@ function sendBye() {
 	stompClient.send("/app/chat/send", {}, JSON.stringify(data));
 }
 function showChat(chatLog) {
-	receiver = chatLog.conId;/*parseInt(chatLog.conId);*/
+	receiver = chatLog.conId;
 	if(receiver<100){
 		closeLoadingWithMask();
 	}
@@ -85,15 +77,12 @@ function showMe() {
 }
 
 $(function () {
-//	$("form").on('submit', function (e) {
-//		e.preventDefault();
-//	});
+
 	$( "#help" ).click(function(e) {
 		if(userId!=null){
 			e.preventDefault();}
 	});
 	$( "#back" ).click(function(e) { 
-//		$( "#help" ).unbind();
 		sendBye();
 		disconnect();});
 	$( "#chatSend" ).click(function(){ 

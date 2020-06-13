@@ -32,26 +32,30 @@
 				<col width="20%" />
 				<col width="*%" />
 				<col width="20%" />
+				<col width="10%" />
 			</colgroup>
 			<thead>
 				<tr>
 					<th scope="col">번호</th>
 					<th scope="col">요청 시간</th>
 					<th scope="col">상태</th>
+					<th scope="col">입장 버튼</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:if="${#lists.size(list)} > 0" th:each="vo : ${list}">
-					<td><a href="/chat/ConQA/" th:attrappend="href=${vo.userId}"
-						th:text="${vo.roomId}"></a></td>
+					<td
+						th:text="${vo.roomId}"></td>
 					<!-- <td th:text="${vo.userId}"></td> -->
 					<td
 						th:text="${#temporals.format(vo.createdTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
 					<td th:text="${vo.state}"></td>
+					<td><a class = "btn" href="/chat/ConQA/" th:attrappend="href=${vo.userId}">입장</a></td>
 				</tr>
 				<tr th:unless="${#lists.size(list)} > 0">
 					<td colspan="3" class="text-center">조회된 결과가 없습니다.</td>
 				</tr>
+				
 
 			</tbody>
 		</table>

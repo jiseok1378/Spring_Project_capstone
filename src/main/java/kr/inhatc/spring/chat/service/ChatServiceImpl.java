@@ -66,10 +66,6 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public void saveMessage(ChatLog chatLog) {
-//		ChatLog chatMessage = new ChatLog(); 
-//		chatMessage.setUserId(chatLog.getUserId());
-//		//chatMessage.setConId(chatLog.getConId());
-//		chatMessage.setContent(chatLog.getContent());;
 		chatRepository.save(chatLog);
 	}
 

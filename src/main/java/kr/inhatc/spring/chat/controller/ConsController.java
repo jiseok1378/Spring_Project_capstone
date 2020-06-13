@@ -65,21 +65,31 @@ public class ConsController {
 		
 		return "chat/ConQA";
 	}
-	
+	@RequestMapping("/main/chatbot")
+	public String chatbot() {
+		return "main/AIbotChat";
+	}
+	@RequestMapping(value = {"/main/Human/{userId}"}, method=RequestMethod.GET)
+	public String Human(@PathVariable("userId") Optional<String> userId, Model model) {
+		String uid = userId.get();
+		model.addAttribute("sender", uid);
+		int conId = chatService.findId(uid);
+		model.addAttribute("receiver", Integer.toString(conId));
+		model.addAttribute("who","사용자");
+		
+		return "main/HumanChat";
+	}
 	@RequestMapping(value = {"/main/mainQA","/main/mainQA/{userId}"}, method=RequestMethod.GET)
 	public String confirmerList(@PathVariable("userId") Optional<String> userId, Model model) {
 		if (userId.isPresent()){
-			//log.debug("==========   >" + "사용자식별번호 있음");
 			String uid = userId.get();
 			model.addAttribute("sender", uid);
-			
 			int conId = chatService.findId(uid);
 			model.addAttribute("receiver", Integer.toString(conId));
 			model.addAttribute("who","사용자");
 			return "main/mainQAInfoHuman";
 			
 		} else {
-			//log.debug("============>" + "기본");
 			return "main/mainQAInfoAI";
 		}
 
@@ -96,57 +106,13 @@ public class ConsController {
 		//중복 방지 - 이미 있는 사용자인지 확인
 		while (chatService.findId(randId)!=-1) {
 			randId = rand.nextInt(2147483647);
-//			log.debug("다시다시다시다싣");
 		}
-//		randId = 2;
 		room.setUserId(randId);
 		room.setState("대기중");
-//		log.debug("==========>"+room.getUserId());
-//		log.debug("==========>"+room.getState());
-//		log.debug("==========>"+room.getCreatedTime());
-		
 		chatService.saveRoom(room);
-		
-//		response.setContentType("text/html; charset=UTF-8");
-//		PrintWriter out;
-//		try {
-//			out = response.getWriter();
-//			out.println("<script>alert('상담원과 연결중입니다. 잠시만 기다려주세요.');location.href='/main/mainQA/"+randId+"';</script>");
-//			out.flush();
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		return "redirect:/main/mainQA/" + randId;
+
+		return "redirect:/main/Human/" + randId;
 	}
 
-	//	@RequestMapping(value = "/user/userInsert", method=RequestMethod.POST)
-	//	public String userInsert(Users user) {
-	//		userService.saveUsers(user);
-	//		return "redirect:/user/userList";
-	//	}
-	//	
-	//	@RequestMapping(value = "/user/userDetail/{id}", method=RequestMethod.GET)
-	//	public String userDetail(@PathVariable("id") String id, Model model) { //@PathVariable 경로처럼 가져옴
-	//		Users user = userService.userDetail(id);
-	//		model.addAttribute("user", user);
-	//		//System.out.println("============> " + user);
-	//		return "user/userDetail";
-	//	}
-	//	
-	//	@RequestMapping(value = "/user/userUpdate/{id}", method=RequestMethod.POST)
-	//	public String userUpdate(@PathVariable("id") String id, Users user) {
-	//		
-	//		// 아이디 설정
-	//		user.setId(id);
-	//		//System.out.println("=========> " + user);
-	//		userService.saveUsers(user);
-	//		return "redirect:/user/userList";
-	//	}
-	//	
-	//	@RequestMapping(value = "/user/userDelete/{id}", method=RequestMethod.GET)
-	//	public String useDelete(@PathVariable("id") String id) {
-	//		userService.userDelete(id);
-	//		return "redirect:/user/userList";
-	//	}
+
 }

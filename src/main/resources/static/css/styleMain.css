@@ -37,7 +37,7 @@ body{
 	cursor: pointer;
 	position: relative;
 	margin: 0 20px;
-	z-index: 1; /* ¹Ø¿¡ span ¾Èº¸ÀÌ°Ô */
+	z-index: 1; /* ï¿½Ø¿ï¿½ span ï¿½Èºï¿½ï¿½Ì°ï¿½ */
 }
 .image img{
 	width: 100%;	
@@ -82,7 +82,7 @@ body{
 	font-size: 60px;
 	line-height: 200px;
 	background: #34495e;
-	z-index: 1; ¹Ø¿¡ span ¾Èº¸ÀÌ°Ô
+	z-index: 1; ï¿½Ø¿ï¿½ span ï¿½Èºï¿½ï¿½Ì°ï¿½
 	transition: transform 0.6s;
 } */
 .contact_m-method span{

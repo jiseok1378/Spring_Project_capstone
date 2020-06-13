@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- index.html  고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/style_QA.css}">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<!-- 채팅창용 -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- 추가 -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script th:inline="javascript">
+		/* <![CDATA[*/
+		var userId = /*[[${sender}]]*/null;
+		/* ]]> */
+		/* <![CDATA[*/
+		var sender = /*[[${sender}]]*/null;
+		/* ]]> */
+		/* <![CDATA[*/
+		var receiver = /*[[${receiver}]]*/null;
+		/* ]]> */
+		/* <![CDATA[*/
+		var who = /*[[${who}]]*/null;
+		/* ]]> */
+	//-- 함수 추가 --
+	function LoadingWithMask() {
+			//화면의 높이와 너비를 구합니다.
+			var maskHeight = $(document).height();
+			var maskWidth = window.document.body.clientWidth;
+
+			//화면에 출력할 마스크를 설정해줍니다.
+			var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+			var loadingImg = '';
+
+			loadingImg += " <img src='/Pacman.gif' height = '70px' style='display: block; margin: 60px auto;' align='center' />";
+
+			//화면에 레이어 추가
+			$('body').append(mask)
+
+			//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+			$('#mask').css({
+				'width' : maskWidth,
+				'height' : maskHeight,
+				'opacity' : '0.3'
+			});
+
+			//마스크 표시
+			$('#mask').show();
+
+			//로딩중 이미지 표시
+			$('#loading').append(loadingImg);
+			$('#loading').append("<div style='text-align: center;'>상담원과 연결중입니다....<br>상담신청이 많을 시 지연될 수 있습니다.</div>");
+			$('#loading').show();
+		}
+
+		function closeLoadingWithMask() {
+			$('#mask, #loading').hide();
+			$('#mask, #loading').empty();
+		}
+	</script>
+	<script src="/app.js"></script>
+<script>
+				$(document).ready(function(){ // 엔터키 입력 가능하게
+				       $("#Q").keypress(function (e) {
+				        if (e.which == 13){
+				        	serverToday()
+				        	$('#Q').val(''); // 텍스트 내용 초기화
+				        }
+				    });
+				});
+				
+				var date;
+				var year;
+				var month;
+				var day;
+				var hour;
+				var min;
+				var time;
+				var curDateFmt2;
+				var d2;
+
+				function serverToday() {
+					var xmlHttp;
+					//분기하지 않으면 IE에서만 작동된다. 
+					if (window.XMLHttpRequest) { // IE 7.0 이상, 크롬, 파이어폭스일 경우 분기 
+						xmlHttp = new XMLHttpRequest();
+						xmlHttp
+								.open('HEAD', window.location.href.toString(),
+										false);
+						xmlHttp.setRequestHeader("Content-Type", "text/html");
+						xmlHttp.send('');
+					} else if (window.ActiveXObject) {
+						xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+						xmlHttp
+								.open('HEAD', window.location.href.toString(),
+										false);
+						xmlHttp.setRequestHeader("Content-Type", "text/html");
+						xmlHttp.send('');
+					}
+					var st = xmlHttp.getResponseHeader("Date");
+					var curDate = new Date(st);
+					var curDateFmt;
+					var year = curDate.getFullYear();
+					var month = curDate.getMonth() + 1;
+					var day = curDate.getDate();
+					var hours = curDate.getHours();
+					var minutes = curDate.getMinutes();
+					if (parseInt(month) < 10) {
+						month = 0 + "" + month;
+					}
+					if (parseInt(day) < 10) {
+						day = 0 + "" + day;
+					}
+					if (parseInt(hours) < 10) {
+						hours = 0 + "" + hours;
+					}
+					if (parseInt(minutes) < 10) {
+						minutes = 0 + "" + minutes;
+					}
+					var curDateFmt = year + "-" + month + "-" + day + "T" + hours
+							+ ":" + minutes + ":00";
+					var d = new Date(curDateFmt);
+					/* var time1 = moment(d).format('h:mm a | MMMM DD') */
+					/* console.log(time1); */
+					return d;
+				}
+				$(document).ready(function() {
+
+				});
+				
+				function chatList() {
+					$('#Q').val(''); // text 내용 초기화
+				}
+
+			</script>
+</th:block>
+<div layout:fragment="content">
+
+		<div style="height: 100%;">
+			<!-- message -->
+			<div class="msg-header" style="background: /* #54cff9 */;">
+				<div id="greetings" class="active2 header-icons"  style="width: 100%; padding-bottom: 0;">
+				<h4>Covid-19 상담원에게 질문하기
+					<a id="help" href="/chat/idMake"><i class="fa fa-phone"></i></a>
+				</h4>
+			</div>
+				<div class="header-icons">
+				</div>
+			</div>
+
+			<div class="chat-page">
+				<!-- 채팅 화면 -->
+				<div class="msg-inbox" style="background: /* #97cfe261 */;">
+					<div class="chats" style="overflow: scroll !important;">
+						<div id = "loading" style="height: 60%;">
+						</div>
+						<div class="msg-page">
+							<!-- 질문과 답 -->
+							<div id="QnA">
+								<!-- websocket으로 주고 받음 -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 입력부분 -->
+				<div class="msg-bottom">
+					<div class="input-group">
+						<input type="text" id="Q" class="form-control" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"
+							placeholder="상담원에게 물어보세요"/>
+						<div class="input-group-append">
+						<a id="chatSend"><span class="input-group-text"><i
+								class="fa fa-paper-plane"></i></span> </a><span>
+							<button class="btn btn-info">
+								<a id="back" href="/main/mainQA">챗봇으로 돌아가기</a>
+							</button>
+						</span>
+					</div>
+					</div>
+					
+				</div>
+				
+			</div>
+
+			
+
+		</div>
+	</div>
+
+
+</html>

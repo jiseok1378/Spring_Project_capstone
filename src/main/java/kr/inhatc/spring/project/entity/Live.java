@@ -18,7 +18,6 @@ public class Live {
 
 	@Id
 	private int idx;
-	
 	private String con_w;
 	private String incon_w;
 	private String dead_w;

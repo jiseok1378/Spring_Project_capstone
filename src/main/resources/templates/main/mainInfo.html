@@ -13,25 +13,22 @@
 </th:block>
 
 <div layout:fragment="content">
+	<div style="min-height: calc(100vh - 136px); margin: 0px 100px 0px 100px;">
 
-
-	<div class=""
-		style="min-height: calc(100vh - 136px); margin: 0px 100px 0px 100px;">
-
-		<span class="pull-left" style="font-size: 30px">&nbsp; Covid-19 정보</span>
+		<span class="pull-left" style="font-size: 30px">&nbsp; Covid-19
+			정보</span>
 
 		<div style="border-bottom: 2px solid black; height: 50px;">
 			<!-- 밑줄 -->
 		</div>
 		<p>
-
 			<!-- 그룹 태그로 role과 aria-multiselectable를 설정한다. -->
 		<div class="panel-group" id="accordion" role="tablist"
 			aria-multiselectable="true">
 			<!-- 하나의 item입니다. 미작동 : data-parent 설청과 href 설정 제대로 하기 -->
 			<div class="panel panel-default">
 				<div class="panel-heading K_fontsize_20px K_bord_bottom" role="tab">
-				<!-- 이부분 디비 연동시 href값 맞추는거 mainMove부분 주석 참조 -->
+					<!-- 이부분 디비 연동시 href값 맞추는거 mainMove부분 주석 참조 -->
 					<a role="button" data-toggle="collapse" data-parent="#accordion"
 						href="#collapse1" aria-expanded="false"> [이미지] 긴급재난지원금 안내 </a>
 				</div>

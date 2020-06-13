@@ -6,52 +6,91 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- index.html  고유 CSS 추가 -->
 <th:block layout:fragment="css">
-<link rel="stylesheet" th:href="@{/css/styleMain.css}"></link>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/styleMain.css}"></link>
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+		integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+		crossorigin="anonymous">
+	<link rel = "stylesheet" href = "http://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+	
+	<style>	
+		.even {
+			width: 100%;
+			height: 500px;
+		}
+	
+		.white_gul { font-size: 15px; font-family: "Nanum Gothic", "맑은 고딕"; }
+	</style>
 </th:block>
-
-
 <!-- index.html 고유 스크립트 추가 -->
 <th:block layout:fragment="script">
 </th:block>
 
 <div layout:fragment="content">
-<p><br>
-<div class="text-center main_title">코로나바이러스감염증-19(COVID-19)</div>
-	<div class="container_m">
-		<div class="contact_m-method image">
-			<a href="/main/mainQA">
-			<i><img src="/images_main/chat/chat1.png" alt=""></i>
-			<span>코로나-19 채팅 Q&A</span>
-			</a>
-		</div>
-		<div class="contact_m-method image">
-			<a href="/main/mainQA">
-			<i><img src="/images_main/info/info1.png" alt=""></i>
-			<span>코로나-19 정보</span>	
-			</a>
-		</div>
-		<div class="contact_m-method image">
-		<a href="/main/mainLive">
-			<i><img src="/images_main/live/live1.png" alt=""></i>
-<!-- 		<i class="fas fa-head-side-virus"></i>-->			
-			<span>코로나-19 현황판</span>
-			</a>
-		</div>
-		<div class="contact_m-method image">
-		<a href="/main/mainMask">
-			<i><img src="/images_main/mask/mask2.png" alt=""></i>
-			<span>마스크 판매처 위치</span>
-			</a>
-		</div>
-		<div class="contact_m-method image">
-		<a href="/main/mainMove">
-			<i><img src="/images_main/move/move2.png" alt=""></i>
-			<span>확진자 이동경로</span>
-		</a>
+
+		<div class="jumbotron">
+			<div style = "padding : 20px; float: left; width: 50%; " class = "white_gul">
+			<h1 >
+				<b>코로나를 위해 만들어진 챗봇을 체험해 보세요.</b>
+			</h1>
+			<br />
+			<p>
+				당신을 위한 200여가지의 질문과 답변. 그리고 잡담기능 또한 있는 인공지능 챗봇.
+			</p>
+			<br />
+			<a href = "/main/mainQA" class = "btn" style = "background-color : #323edd; color: white;">이동하기</a>
+		 </div>
+			<img src = "/상담.png"/ height="460px;" width="48%">
 		</div>
 
+
+		<div class="even">
+			<img src = "/차트.svg"/ height="460px;" width="48%" style="float: left; margin-left: 20px;">
+			<div style = "padding : 100px; float: right; width: 50%; text-align: right;" class = "white_gul">
+			<h1>
+				<b>확진자 동선 또한 파악할 수 있습니다.</b>
+			</h1>
+			<br />
+			<p>
+				매일매일 업데이트 돠는 확진자 정보. 전 세계에서 발병하는 질병을 한눈에 깔끔하게.
+			</p>
+			<br />
+			<a href = "/main/mainLive" class = "btn" style = "background-color : #323edd; color: white; float: right;">이동하기</a>
+		 </div>
+
+		
+		</div>
+
+		<div class="jumbotron">
+		<div style = "padding : 20px; float: left; width: 50%; " class = "white_gul">
+			<h1 >
+				<b>챗봇이 혹시 모르는 질문이 있나요? <p>상담원에게 질문해보세요!</b>
+			</h1>
+			<br />
+			<p>
+				당신의 질문을 위해 언제나 대기하고있는 상담원이 여기에 있습니다. <p>전화기 버튼을 눌러 상담을 시작해보세요!
+				당신이 질문해줄수록, 챗봇 또한 똑똑해집니다.
+			</p>
+			<br />
+			<a href = "/main/mainQA" class = "btn" style = "background-color : #323edd; color: white;">이동하기</a>
+		 </div>
+			<img src = "/상담원.jpg"/ height="460px;" width="48%">
+		</div>
+
+
+		<div class="even">
+			<img src = "/정보2.jpg"/ height="460px;" width="48%" style="float: left; margin-left: 70px;">
+			<div style = "padding : 100px; float: right; width: 45%; text-align: right;" class = "white_gul">
+			<h1>
+				<b>코로나에 대한 최신 정보들을 확인해보세요.</b>
+			</h1>
+			<br />
+			<p>
+				이미지로 준비된 많은 코로나 최신 정보들. 당신을 위해 준비했습니다. 여기에서 확인해보세요!
+			</p>
+			<br />
+			<a href = "/main/mainQA" class = "btn" style = "background-color : #323edd; color: white;">이동하기</a>
+		</div>
 	</div>
-</div>
-
+	</div>
 </html>

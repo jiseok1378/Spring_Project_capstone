@@ -24,12 +24,6 @@ public class Consultant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int conId;
 	
-	
-//	@OneToMany(mappedBy = "conId")
-//	private List<ChatLog> cl = new ArrayList<ChatLog>();
-//	@OneToMany(mappedBy = "conId")
-//	private List<Room> rr = new ArrayList<Room>();
-	
 	@Column(length = 20)
 	private String id; 
 	@Column(length = 20)

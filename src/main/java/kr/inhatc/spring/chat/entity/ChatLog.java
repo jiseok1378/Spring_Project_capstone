@@ -31,9 +31,6 @@ import lombok.NoArgsConstructor;
 public class ChatLog {
 	@Id
 	private int userId;
-	
-//	@ManyToOne(targetEntity = Consultant.class)
-//	@JoinColumn(name = "conId")
 	private int conId;
 	
 	@Id
