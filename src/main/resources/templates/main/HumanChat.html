@@ -47,7 +47,7 @@
 			var mask = "<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
 			var loadingImg = '';
 
-			loadingImg += " <img src='/Pacman.gif' height = '70px' style='display: block; margin: 60px auto;' align='center' />";
+			loadingImg += " <img src='/Pacman.gif' style='display: block; margin: 60px auto;' align='center' />";
 
 			//화면에 레이어 추가
 			$('body').append(mask)
@@ -74,11 +74,11 @@
 		}
 	</script>
 	<script src="/app.js"></script>
-<script>
+	<script>
 				$(document).ready(function(){ // 엔터키 입력 가능하게
 				       $("#Q").keypress(function (e) {
 				        if (e.which == 13){
-				        	serverToday()
+				        	sendChat();
 				        	$('#Q').val(''); // 텍스트 내용 초기화
 				        }
 				    });
@@ -151,38 +151,40 @@
 </th:block>
 <div layout:fragment="content">
 
-		<div style="height: 100%;">
-			<!-- message -->
-			<div class="msg-header" style="background: /* #54cff9 */;">
-				<div id="greetings" class="active2 header-icons"  style="width: 100%; padding-bottom: 0;">
-				<h4>Covid-19 상담원에게 질문하기
-					<a id="help" href="/chat/idMake"><i class="fa fa-phone"></i></a>
+	<div style="height: 100%;">
+		<!-- message -->
+		<div class="msg-header" style="background: /* #54cff9 */;">
+			<div id="greetings" class="active2 header-icons"
+				style="width: 100%; padding-bottom: 0;">
+				<h4>
+					Covid-19 상담원에게 질문하기 <a id="help" href="/chat/idMake"><i
+						class="fa fa-phone"></i></a>
 				</h4>
 			</div>
-				<div class="header-icons">
-				</div>
-			</div>
+			<div class="header-icons"></div>
+		</div>
 
-			<div class="chat-page">
-				<!-- 채팅 화면 -->
-				<div class="msg-inbox" style="background: /* #97cfe261 */;">
-					<div class="chats" style="overflow: scroll !important;">
-						<div id = "loading" style="height: 60%;">
-						</div>
-						<div class="msg-page">
-							<!-- 질문과 답 -->
-							<div id="QnA">
-								<!-- websocket으로 주고 받음 -->
-							</div>
+		<div class="chat-page">
+			<!-- 채팅 화면 -->
+			<div class="msg-inbox" style="background: /* #97cfe261 */;">
+				<div class="chats" style="overflow: scroll !important;">
+
+					<div class="msg-page">
+						<!-- 질문과 답 -->
+						<div id="QnA">
+							<div id="loading"></div>
+							<!-- websocket으로 주고 받음 -->
 						</div>
 					</div>
 				</div>
-				<!-- 입력부분 -->
-				<div class="msg-bottom">
-					<div class="input-group">
-						<input type="text" id="Q" class="form-control" onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"
-							placeholder="상담원에게 물어보세요"/>
-						<div class="input-group-append">
+			</div>
+			<!-- 입력부분 -->
+			<div class="msg-bottom">
+				<div class="input-group">
+					<input type="text" id="Q" class="form-control"
+						onKeypress="javascript:if(event.keyCode==13) {search_onclick_submit}"
+						placeholder="상담원에게 물어보세요" />
+					<div class="input-group-append">
 						<a id="chatSend"><span class="input-group-text"><i
 								class="fa fa-paper-plane"></i></span> </a><span>
 							<button class="btn btn-info">
@@ -190,16 +192,16 @@
 							</button>
 						</span>
 					</div>
-					</div>
-					
 				</div>
-				
+
 			</div>
 
-			
-
 		</div>
+
+
+
 	</div>
+</div>
 
 
 </html>

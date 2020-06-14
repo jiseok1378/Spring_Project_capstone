@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+</th:block>
+
+<div layout:fragment="content">
+	<div class="container">
+		<h2>사용자 상세</h2>
+		<form role="form" th:method="post" th:action="'/con/consultantUpdate/' + ${user.ConId}">
+			<table class = "table table-hover">
+				<colgroup>
+					<col width="15%" />
+					<col width="35%" />
+					<col width="15%" />
+					<col width="35%" />
+				</colgroup>
+				<caption>사용자 상세 내용</caption>
+				<tbody>
+					<tr>
+						<th scope = "row">사용자 아이디</th>
+						<td><input type="text" id = "id" name = "id" th:value="${user.CId}" class="form-control" disabled="disabled"/></td>
+					</tr>
+					<tr>
+						<th scope = "row">사용자 패스워드</th>
+						<td><input type="text" id = "pw" name = "pw" th:value="${user.pw}" class="form-control"/></td>
+					</tr>
+					<tr>
+						<th scope = "row">사용자 이름</th>
+						<td><input type="text" id = "name" name = "name" th:value="${user.name}" class="form-control"/></td>
+					</tr>									
+					<tr>
+						<th scope = "row">사용자 권한</th>
+						<td><input type="text" id = "role" name = "role" th:value="${user.role}" class="form-control"/></td>
+					</tr>					
+
+				</tbody>
+			</table>
+			<input type = "submit" id = "edit" value = "수정" class = "btn">
+			<button class = "btn">
+				<a href="/con/consultantList">리스트</a>
+			</button>
+			<button class = "btn">
+				<a href="/con/consultantDelete/" th:attrappend="href=${user.ConId}">삭제</a>
+			</button>
+		</form>
+	</div>
+
+</html> 

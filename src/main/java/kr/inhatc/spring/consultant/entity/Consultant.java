@@ -1,14 +1,10 @@
-package kr.inhatc.spring.chat.entity;
-
-import java.util.ArrayList;
-import java.util.List;
+package kr.inhatc.spring.consultant.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -24,12 +20,15 @@ public class Consultant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int conId;
 	
-	@Column(length = 20)
-	private String id; 
+	@Column(length = 20, unique=true)
+	private String CId; 
 	@Column(length = 20)
 	private String pw; 
 	@Column(length = 20)
 	private String name;
+	
+	private String role;
+	private String id;
 
 
 }

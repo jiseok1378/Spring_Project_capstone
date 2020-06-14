@@ -1,5 +1,5 @@
 var stompClient = null;
-//var isRun = false;
+var num = 0;
 
 if(userId!=null){
 	connect();
@@ -10,10 +10,13 @@ if(userId!=null){
 function connect() {
 	var socket = new SockJS('/websocket');
 	stompClient = Stomp.over(socket);
+	num = 0;
 	stompClient.connect({}, function (frame) {
 		console.log('Connected: ' + frame);
 		if(sender > 100){
-		LoadingWithMask();}
+		LoadingWithMask();} else{
+			sendHello();
+		}
 		// topic 뒤에 식별번호 sender (보내는 사람)
 		stompClient.subscribe('/topic/'+ sender, function (chatLog) {
 			//보낼때말고 받을 때도 시간필요
@@ -33,17 +36,27 @@ function disconnect() {
 
 /* Chat과 관련된 메서드 추가 */
 function sendChat() {
+	num++;
 	// /app/hello로 JSON 파라미터를 메세지 body로 전송.
 	d = serverToday();
 	time = moment(d).format('h:mm a | MMMM DD');
-	data = {'userId':receiver, 'conId':sender,/*'receiver':receiver,'sender':sender,*/'sendTime':d,'content':$("#Q").val(),'who':who};
+	data = {'userId':receiver, 'conId':sender,/*'receiver':receiver,'sender':sender,*/'sendTime':d,'content':$("#Q").val(),'who':who, 'num':num};
 	stompClient.send("/app/chat/send", {}, JSON.stringify(data));
 	showMe(); 
+}
+function sendHello() {
+	d = serverToday();
+	time = moment(d).format('h:mm a | MMMM DD');
+	data = {'userId':receiver, 'conId':sender,'content':'안녕하세요.무엇을 도와드릴까요?'};
+	stompClient.send("/app/chat/send", {}, JSON.stringify(data));
+	$('#Q').val("안녕하세요.무엇을 도와드릴까요?");
+	showMe();
+	$('#Q').val("");
 }
 function sendBye() {
 	d = serverToday();
 	time = moment(d).format('h:mm a | MMMM DD');
-	data = {'content':'사용자가 채팅을 종료하였습니다.'};
+	data = {'userId':receiver, 'conId':sender,'content':'사용자가 채팅을 종료하였습니다.'};
 	stompClient.send("/app/chat/send", {}, JSON.stringify(data));
 }
 function showChat(chatLog) {

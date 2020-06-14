@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <!-- 페이지 처음쳤을때 DB select -->
+    <!-- 온도 -1은 처음 등록이라 온도가 0도 이상만 검색함 -->
+<mapper namespace="kr.inhatc.spring.visitor.mapper.visitorMapper">
+	<select id="visitorList"
+		resultType="kr.inhatc.spring.visitor.dto.visitorDTO">
+		SELECT idx , come_in_time
+		, identified_num , person_name , stored_file_path , temperate ,phone_number
+		FROM coming_and_going
+		where temperate > 0
+		ORDER BY idx desc
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

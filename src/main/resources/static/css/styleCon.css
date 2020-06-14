@@ -1,0 +1,50 @@
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+.box {
+	height: 500px;
+	font-weight: bold;
+	margin: 20px;
+}
+
+.box1 {
+	float:left;
+	width: 22%;
+}
+
+.box2 {
+	float:left;
+	width: 22%;
+}
+
+.box3 {
+	position: absolute;
+	right : 50px;
+	top : auto;
+	float:right;
+	width: 46%;
+}
+
+
+.btnSave {
+	position: relative;
+	bottom :30px;
+	left : 790px;
+}
+.btnAdd {
+	position: relative;
+	bottom :30px;
+	left : -80px;
+}
+
+.ch {
+	 
+	 font-size: large; 
+}
+.active-color { background-color:#3EE0D0; }

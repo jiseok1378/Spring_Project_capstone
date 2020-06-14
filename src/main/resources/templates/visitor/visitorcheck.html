@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- index.html  고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+		crossorigin="anonymous">
+	<link th:href="@{/css/datetimepickerstyle.css}" rel="stylesheet">
+
+	<style>
+			.accordion-container {
+				position: relative;
+				width: 100%;
+				border: 1px solid #0079c1;
+				border-top: none;
+				outline: 0;
+				cursor: pointer;
+			}
+			
+			.accordion-container .article-title {
+				display: block;
+				position: relative;
+				margin: 0;
+				padding: 0.625em 0.625em 2em 2em;
+				font-size: 1.25em;
+				font-weight: normal;
+				color: black;
+				background: white;
+				cursor: pointer;
+			}
+			
+			.accordion-container .article-title:hover, .accordion-container .article-title:active,
+				.accordion-container .content-entry.open .article-title {
+				background-color: #00aaa7;
+				color: white;
+			}
+			
+			.accordion-container .article-title:hover i:before, .accordion-container .article-title:hover i:active,
+				.accordion-container .content-entry.open i {
+				color: white;
+			}
+			
+			.article-title {
+				position: relative;
+				border-bottom: solid 1px #dee2e6;
+				height: 40px;
+			}
+			
+			.article-title:after {
+				content: "";
+				position: absolute;
+				right: 25px;
+				top: 38%;
+				transition: all 0.2s ease-in-out;
+				display: block;
+				width: 8px;
+				height: 8px;
+				border-top: solid 2px #fff;
+				border-right: solid 2px #fff;
+				-webkit-transform: rotate(135deg);
+				transform: rotate(135deg);
+			}
+			
+			.article-title.open:after {
+				-webkit-transform: rotate(-45deg);
+				transform: rotate(-45deg);
+				top: 45%;
+			}
+			
+			.accordion-content {
+				display: none;
+				padding-left: 2.3125em;
+			}
+			
+			/* CSS for CodePen */
+			.accordion-container {
+				width: 100%;
+				margin: 1.875em auto;
+			}
+			
+			.rightline {
+				border-right: solid 1px #dee2e6;
+			}
+			
+			
+			.searchbar {
+				margin-bottom: auto;
+				margin-top: auto;
+				height: 60px;
+				background-color: #BDD6D9;
+				border-radius: 30px;
+				padding: 10px;
+			}
+			
+			.search_input {
+				color: black;
+				border: 0;
+				outline: 0;
+				background: none;
+				width: 0;
+				caret-color: transparent;
+				line-height: 40px;
+				transition: width 0.4s linear;
+				width: 300px;
+				padding: 0 10px;
+				font-size: 20px;
+				text-align: center;
+			}
+			
+			.searchbar:hover>.search_input {
+				padding: 0 10px;
+				width: 450px;
+				caret-color: red;
+				transition: width 0.4s linear;
+			}
+			
+			.search_icon {
+				height: 40px;
+				width: 40px;
+				float: right;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: 50%;
+				color: white;
+				background: white;
+				text-decoration: none;
+			}
+	</style>
+</th:block>
+
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- 추가 -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/locale/ko.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+	<script th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+</th:block>
+
+<div layout:fragment="content">
+	<div class="col-xs-2">
+		<div class="form-group"
+			style="position: fixed; width: 10%; margin-left: 2%; margin-top: 15%;">
+			<h5 style="text-align: center;">전송 인원</h5>
+			<select multiple="" class="form-control" id="SendtoMessage">
+
+			</select>
+			<button type="button" class="btn"
+				style="background-color: #BDD6D9; margin-left: 20%; margin-top: 5%">Send
+				to Message</button>
+		</div>
+	</div>
+
+	<div class="col-xs-8">
+
+		<!-- search bar -->
+
+		<div style="margin-top: 10%;">
+			<form>
+				<div class="container h-100">
+					<div class="d-flex justify-content-center h-100">
+
+						<div class="searchbar" style="margin-right: 3%;">
+							<input class="search_input" type="text" name="person_name"
+								placeholder="이름" id="person_name">
+
+						</div>
+						<div class="searchbar dtp_main" id="time"
+							style="margin-right: 3%;">
+							<input class="search_input" value="날짜" type="text" name="time2"
+								placeholder="날짜" id="time2">
+
+							<script type="text/javascript">
+								$(function() {
+									$('#time2').datetimepicker({
+										format : "YYYY-MM-DD HH:mm",
+										sideBySide : true
+									});
+								});
+							</script>
+						</div>
+						<div class="searchbar dtp_main" id="time">
+							<input class="search_input" value="날짜" type="text"
+								name="updowntime" placeholder="검색 시간 범위" id="updowntime">
+
+						</div>
+			</form>
+			<script type="text/javascript">
+				$(function() {
+					$('#updowntime').datetimepicker({
+						format : "HH:00"
+					});
+				});
+			</script>
+			<input type=submit style="margin-left: 2%;">
+
+
+		</div>
+
+
+
+		<!--  주 내용 -->
+		<div class="col-md-12"
+			style="margin-bottom: 2%; margin-top: 7%; border-bottom: solid 1px black;">
+			<h4 class="col-xs-1 rightline" style="text-align: center;">No</h4>
+			<h4 class="col-xs-2 rightline" style="text-align: center;">이름</h4>
+			<h4 class="col-xs-2 rightline" style="text-align: center;">학번</h4>
+			<h4 class="col-xs-2 rightline" style="text-align: center;">온도</h4>
+			<h4 class="col-xs-3 rightline" style="text-align: center;">입장시간</h4>
+			<h4 class="col-xs-2 " style="text-align: center;">연락처</h4>
+		</div>
+		<div th:each="vo : ${list}" th:if="${#lists.size(list)} > 0 ">
+			<div class="article-title col-md-12 " style="margin-top: 1%">
+
+				<div class="col-xs-1 rightline">
+
+
+
+					<h4 style="text-align: center;" th:text="${vo.idx}"></h4>
+				</div>
+				<div class="col-xs-2 rightline">
+					<h4 style="text-align: center;" id="person_name"
+						th:text="${vo.personname}"></h4>
+				</div>
+				<div class="col-xs-2 rightline">
+					<h4 style="text-align: center;" id="identified_num"
+						th:text="${vo.identifiednum}"></h4>
+				</div>
+				<div class="col-xs-2 rightline">
+					<h4 style="text-align: center;" th:text="${vo.temperate}"></h4>
+				</div>
+				<div class="col-xs-3 rightline">
+					<h4 style="text-align: center;" th:text="${vo.comeintime}"></h4>
+				</div>
+				<div class="col-xs-2 ">
+					<h4 style="text-align: center;" id="phone_number"
+						th:text="${vo.phonenumber}"></h4>
+				</div>
+				<h3></h3>
+			</div>
+			<div class="accordion-content">
+				<div class="row">
+					<div class="col-xs-1">
+						<!--  체크박스 클릭시 좌측의 전송인원으로 추가 -->
+						<button class="btn" value="" style="margin-top: 125%;" id="check"
+							name="check"
+							th:attr="onclick=|clickfunction('${vo.identifiednum}', '${vo.personname}','${vo.phonenumber}')|">
+
+							<img th:src="@{/icon/left.png}" alt="My Image"
+								style="width: 20px; height: 20px;">
+						</button>
+					</div>
+					<script>
+						function clickfunction(identified_num, person_name,
+								phone_number) {
+							$('#SendtoMessage')
+									.append(
+											$(
+													"<option value='"+phone_number+"'></option>")
+													.attr("value", phone_number)
+													.text(
+															identified_num
+																	+ "_"
+																	+ person_name));
+
+						}
+					</script>
+
+					<div class="col-xs-2">
+						<img th:src="|/personimg/${vo.storedfilepath}|" width="100%"
+							height="100%" />
+					</div>
+					<!--  <p>Accordion content 2</p>-->
+
+					<div class="col-xs-9">
+						<table class="table">
+							<colgroup>
+								<col width="20%" />
+								<col width="80%" />
+							</colgroup>
+							<tr>
+								<td style="text-align: center;"><h3>학번</h3></td>
+								<td><h3 th:text=${vo.identifiednum}></h3></td>
+							</tr>
+
+							<tr>
+								<td style="text-align: center;"><h3>이름</h3></td>
+								<td><h3 th:text=${vo.personname}></h3></td>
+							</tr>
+
+							<tr>
+								<td style="text-align: center;"><h3>온도</h3></td>
+								<td><h3 th:text=${vo.temperate}></h3></td>
+							</tr>
+
+							<tr>
+								<td style="text-align: center;"><h3>입장시간</h3></td>
+								<td><h3 th:text=${vo.comeintime}></h3></td>
+							</tr>
+
+							<tr>
+								<td style="text-align: center;"><h3>연락처</h3></td>
+								<td><h3 th:text=${vo.phonenumber}></h3></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!--/.accordion-content-->
+
+		</div>
+
+		<script type="text/javascript">
+			jQuery(function($) {
+				$('.article-title').on('click', function() {
+					/*クリックでコンテンツを開閉*/
+					$(this).next().slideToggle(200);
+					/*矢印の向きを変更*/
+					$(this).toggleClass('open');
+				});
+
+			});
+		</script>
+	</div>
+	<!--/.accordion-content-->
+
+	<nav>
+		<ul class="pagination justify-content-center" style="margin-top: 15%">
+			<li class="disabled"><a href="#" aria-label="Previous"><span
+					aria-hidden="true">&laquo;</span></a></li>
+			<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+			<li class="inactive"><a href="#">2 </a></li>
+			<li class="inactive"><a href="#">3 </a></li>
+			<li class="inactive"><a href="#">4 </a></li>
+			<li class="inactive"><a href="#">5 </a></li>
+			<li class="inactive"><a href="#">6 </a></li>
+			<li class="inactive"><a href="#">7 </a></li>
+			<li class="inactive"><a href="#">... </a></li>
+		</ul>
+	</nav>
+</div>
+
+</html>

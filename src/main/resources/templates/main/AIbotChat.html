@@ -7,6 +7,7 @@
 <!-- index.html  고유 CSS 추가 -->
 <th:block layout:fragment="css">
 	<link rel="stylesheet" th:href="@{/css/style_QA.css}">
+	<link rel="stylesheet" th:href="@{/css/styleChat.css}">
 </th:block>
 
 <!-- index.html 고유 스크립트 추가 -->
@@ -33,7 +34,7 @@
 				}
 			});
 		});
-		var url_link = 'http://c19e17c41821.ngrok.io/dto/'
+		var url_link = 'http://localhost:5000/dto/'
 		var date;
 		var year;
 		var month;
@@ -43,7 +44,6 @@
 		var time;
 		var curDateFmt2;
 		var d2;
-
 		function serverToday() {
 			var xmlHttp;
 			//분기하지 않으면 IE에서만 작동된다. 
@@ -81,8 +81,6 @@
 			var curDateFmt = year + "-" + month + "-" + day + "T" + hours + ":"
 					+ minutes + ":00";
 			var d = new Date(curDateFmt);
-			/* var time1 = moment(d).format('h:mm a | MMMM DD') */
-			/* console.log(time1); */
 			return d;
 		}
 
@@ -92,32 +90,18 @@
 
 		function chatList() {
 
-			$
-					.ajax({
-						url : url_link,
-						type : 'post',
-						//contentType: "application/json",
-						data : {
-							'Q' : $('#Q').val()
-						},
-						beforeSend : function(jqXHR) {
+			$.ajax({
+					url : url_link,
+					type : 'post',
+					//contentType: "application/json",
+					data : {
+						'Q' : $('#Q').val()
+					},
+					beforeSend : function(jqXHR) {
 							console.log("호출전");
 							d = serverToday();
 							time = moment(d).format('h:mm a | MMMM DD');
-							$('#QnA')
-									.append(
-											"<div class='outgoing-chats'>"
-													+ "<div class='outgoing-chats-msg'>"
-													+ "<p>"
-													+ $('#Q').val()
-													+ "</p>"
-													+ "<span class='time'>"
-													+ time
-													+ "</span>"
-													+ "</div>"
-													+ "<div class='outgoing-chats-img'>"
-													+ "<img src='AI_img.jpg'>"
-													+ "</div></div>")
+							$('#chat').append("<li class='me'><div class='entete'><h3>"+time+"</h3><h2>&nbsp;&nbsp;User</h2>&nbsp;&nbsp;<span class='status blue'></span></div><div class='triangle'></div><div class='message'>"+$("#Q").val()+"</div></li>");
 						},
 						success : function(data) {
 							console.log("성공");
@@ -133,24 +117,10 @@
 									+ hour + ":" + min + ":00";
 							d2 = new Date(curDateFmt2);
 							time2 = moment(d2).format('h:mm a | MMMM DD');
-							$('#QnA')
-									.append(
-											"<div class='received-chats'>"
-													+ "<div class='received-chats-img'>"
-													+ "<img src='user.jpg'>"
-													+ "</div>"
-													+ "<div class='received-msg'>"
-													+ "<div class='received-msg-inbox'>"
-													+ "<p>" + data['A']
-													+ "</p>"
-													+ "<span class='time'>"
-													+ time2 + "</span>"
-													+ "</div>" + "</div>"
-													+ "</div>")
+							$('#chat').append("<li class='you'><div class='entete'><span class='status green'></span><h2>AI ChatBot</h2><h3>&nbsp;"+time2+"</h3></div><div class='triangle'></div><div class='message'>" +data['A'] + "</div></li>");
 						},
 						error : function(jqXHR) {
 							alert("serialize err");
-							//$('#A').text(errorThrown);
 						}
 					});
 			$('#Q').val(''); // text 내용 초기화
@@ -159,11 +129,70 @@
 
 </th:block>
 <div layout:fragment="content">
+	<div id="container" style = "margin-top: 20px;">
+		<aside>
+			<header>
+				<input type="text" placeholder="search">
+			</header>
+			<ul>
+				<li><img
+					src="/images_main/chat/AIbot.png"
+					alt="" width="50px" height="50px">
+					<div>
+						<h2>AI Bot</h2>
+						<h3>
+							<span class="status green"></span> online
+						</h3>
+					</div></li>
+					<li>
+					<div style = "padding-left: 20px;">
+						<h2>질문 예시 1)</h2>
+						<h3>
+						  해외에서 오는 택배를 받아도 될까?
+						</h3>
+					</div></li>
+			</ul>
+		</aside>
+		<main>
+			<header>
+				<img
+					src="/images_main/chat/AIbot.png"
+					alt="" width="50px" height="50px">
+				<div>
+					<h2>AI-Bot</h2>
+					<h3 style = "font-size : 5px;">안녕하세요. AI-Bot입니다.</h3>
+					<h3 style = "font-size : 5px;">코로나 관련 질문을 물어보세요!</h3>
+					<p style="font-size: 5px;">챗봇이 모르는 질문이면 전화기를 클릭하세요</p>
+				</div>
+				<a id="help" href="/main/idMake"><i class="fa fa-phone"></i></a>
+			</header>
+			<ul id="chat">
+				<li class="you">
+					<div class="entete">
+						<span class="status green"></span>
+						<h2>Vincent</h2>
+						<h3>10:12AM, Today</h3>
+					</div>
+					<div class="triangle"></div>
+					<div class="message">안녕하세요? 코로나 19 전용 챗봇이에요. 더욱 자세한 질문을 원하신다면 위쪽에 있는 전화기 버튼을 클릭해주세요</div>
+				</li>
 
-
+			</ul>
+			<div id="footer">
+				<textarea id = "Q" placeholder="Type your message"></textarea>
+				<img
+					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png"
+					alt=""> <img
+					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
+					alt=""> <button id = "" href="#">Send</button>
+			</div>
+		</main>
+	</div>
+</div>
+	<!--  
 	<div>
 		<div class="" style="margin-top: 0">
-			<!-- message -->
+
 			<div class="msg-header" style="background: /* #54cff9 */;">
 				<div id="greetings" class="active2 header-icons"
 					style="width: 100%; padding-bottom: 0;">
@@ -173,27 +202,24 @@
 					</h4>
 				</div>
 				<div class="header-icons">
-					<!-- 상담원 직접통화 -->
-					<!-- 				&nbsp; <i class="fa fa-exclamation-triangle"></i>
-				문제 발생시 -->
+
 				</div>
 			</div>
 
 			<div class="chat-page">
-				<!-- 채팅 화면 -->
+
 				<div class="msg-inbox"
 					style="background: /* #97cfe261 */; height: 13.5rem;">
 					<div class="chats"
 						style="overflow: scroll !important; height: 15rem;">
 						<div class="msg-page">
-							<!-- 질문과 답 -->
+
 							<div id=QnA>
-								<!-- ajax로 들어옴 -->
+
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- 입력부분 -->
 				<div class="msg-bottom">
 					<div class="input-group">
 						<input type="text" id="Q" class="form-control"
@@ -213,8 +239,5 @@
 
 		</div>
 	</div>
-
-
-</div>
-
+-->
 </html>

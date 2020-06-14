@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+html{
+
+  		background-image:url('/aaa.jpg');
+		background-color: #D9E5FF;
+		background-repeat: no-repeat;
+		background-size: 100%,100%;
+}
+</style>
+<body>
+   <h1 style = "color: white"> 권한 에러 : 죄송합니다. 페이지에 대한 접근권한이 없네요</h1>
+   <h3 style = "color: white">다시 로그인 하세요.</h3>
+   <h3 style = "color: white">다시 로그인을 원하시면 <a th:href="@{/login/login}" style = "color: white">여기</a>를 누르세요.</h3>
+</body>
+</html>
